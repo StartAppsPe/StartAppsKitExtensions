@@ -143,6 +143,42 @@ public extension String {
     }
 }
 
+
+enum StringParsingError: Error {
+    case failedToProcessBytes, failedToProcessData, failedToConvertToData
+}
+
+public extension String {
+    
+    init(bytes: [UInt8]) throws {
+        guard let parsedString = String(bytes: bytes, encoding: .utf8) else {
+            throw StringParsingError.failedToProcessBytes
+        }
+        self = parsedString
+    }
+    
+    func bytes() throws -> [UInt8] {
+        let data = try self.data()
+        return [UInt8](data)
+    }
+    
+    init(data: Data) throws {
+        guard let parsedString = String(data: data, encoding: .utf8) else {
+            throw StringParsingError.failedToProcessData
+        }
+        self = parsedString
+    }
+    
+    func data() throws -> Data {
+        guard let parsedData = self.data(using: .utf8) else {
+            throw StringParsingError.failedToConvertToData
+        }
+        return parsedData
+    }
+    
+}
+
+
 #if os(iOS)
     public extension String {
         
