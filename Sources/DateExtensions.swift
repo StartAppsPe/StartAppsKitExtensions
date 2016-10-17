@@ -34,24 +34,43 @@ let DateComponents: NSCalendar.Unit = [
     .year, .month, .day, .weekOfYear, .weekday, .weekdayOrdinal, .hour, .minute, .second
 ]
 
+public enum DateParsingError: Error {
+    case failedToParseString
+}
+
+private var _isoDateFormatter: DateFormatter?
+
 public extension Date {
+    
+    public static var isoDateFormat: String {
+        return "yyyy-MM-dd'T'HH:mm:ssZZZZZ"
+    }
+    public static var isoDateLocale: String {
+        return "en_US_POSIX"
+    }
+    public static var isoDateFormatter: DateFormatter {
+        if _isoDateFormatter == nil {
+            _isoDateFormatter = DateFormatter()
+            _isoDateFormatter!.locale = Locale(identifier: Date.isoDateLocale)
+            _isoDateFormatter!.dateFormat = Date.isoDateFormat
+        }
+        return _isoDateFormatter!
+    }
     
     /********************************************************************************************************/
     // MARK: String Date Methods
     /********************************************************************************************************/
     
-    public init?(string: String, format: String, locale: String? = nil) {
+    public init(string: String, format: String, locale: String? = nil) throws {
         let formatter = DateFormatter()
         formatter.dateFormat = format
         if let locale = locale {
             formatter.locale = Locale(identifier: locale)
         }
-        if let date = formatter.date(from: string) {
-            self.init(timeInterval:0, since:date)
-        } else {
-            self.init(timeInterval:0, since:Date.now())
-            return nil
+        guard let date = formatter.date(from: string) else {
+            throw DateParsingError.failedToParseString
         }
+        self.init(timeInterval:0, since:date)
     }
     
     public func string(format: String, locale: String? = nil) -> String {
