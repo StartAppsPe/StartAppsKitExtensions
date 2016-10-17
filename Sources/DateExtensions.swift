@@ -43,7 +43,7 @@ private var _isoDateFormatter: DateFormatter?
 public extension Date {
     
     public static var isoDateFormat: String {
-        return "yyyy-MM-dd'T'HH:mm:ssZZZZZ"
+        return "yyyy-MM-dd'T'HH:mm:ssZ"
     }
     public static var isoDateLocale: String {
         return "en_US_POSIX"
@@ -55,6 +55,17 @@ public extension Date {
             _isoDateFormatter!.dateFormat = Date.isoDateFormat
         }
         return _isoDateFormatter!
+    }
+    
+    public init(isoFormattedString: String) throws {
+        guard let date = Date.isoDateFormatter.date(from: isoFormattedString) else {
+            throw DateParsingError.failedToParseString
+        }
+        self = date
+    }
+    
+    public var isoFormattedString: String {
+        return Date.isoDateFormatter.string(from: self)
     }
     
     /********************************************************************************************************/
