@@ -30,7 +30,7 @@ let TimeIntervalDay:    TimeInterval = 86400
 let TimeIntervalWeek:   TimeInterval = 604800
 let TimeIntervalYear:   TimeInterval = 31556926
 
-let DateComponents: NSCalendar.Unit = [
+let DateComponents: Set<Calendar.Component> = [
     .year, .month, .day, .weekOfYear, .weekday, .weekdayOrdinal, .hour, .minute, .second
 ]
 
@@ -340,7 +340,7 @@ public extension Date {
         if let locale = locale {
             calendar.locale = Locale(identifier: locale)
         }
-        return (calendar as NSCalendar).components(DateComponents, from: self)
+        return calendar.dateComponents(DateComponents, from: self)
     }
     
     public func nearestHour(locale: String? = nil) -> Int {
