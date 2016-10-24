@@ -33,8 +33,8 @@ public extension Collection {
 
 public extension Collection where Index == Int  {
     
-    public var random: Self.Iterator.Element? {
-        return self[Int(arc4random_uniform(UInt32(count.toIntMax())))]
+    public var randomElement: Self.Iterator.Element? {
+        return self[random(Int(count.toIntMax()))]
     }
     
 }
@@ -44,7 +44,7 @@ public extension MutableCollection where Index == Int  {
     public mutating func shuffle() {
         if count < 2 { return }
         for i in 0..<Int(count.toIntMax()-1) {
-            let j = Int(arc4random_uniform(UInt32(count.toIntMax() - i))) + i
+            let j = random(Int(count.toIntMax()) - i) + i
             guard i != j else { continue }
             swap(&self[i], &self[j])
         }

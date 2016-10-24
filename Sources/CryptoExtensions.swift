@@ -7,6 +7,19 @@ import Foundation
     import Darwin
 #endif
 
+func random(_ range: ClosedRange<Int>) -> Int {
+    let (min, max) = (Int(range.lowerBound), Int(range.upperBound))
+    #if os(Linux) || os(FreeBSD)
+        return min + Int(random() % ((max - min) + 1))
+    #else
+        return min + Int(arc4random_uniform(UInt32(max - min + 1)))
+    #endif
+}
+
+func random(_ count: Int) -> Int {
+    return random(0...count-1)
+}
+
 public class Crypto {
     
     private static func read(numBytes: Int) -> [Int8] {
