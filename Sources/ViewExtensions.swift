@@ -44,8 +44,6 @@
         
     }
     
-    
-    
     public extension UIView {
         
         @IBInspectable public var cornerRadius: CGFloat {
@@ -138,7 +136,7 @@
     
     public extension UIButton {
         
-        @IBInspectable public var cornerRadius: CGFloat {
+        @IBInspectable public override var cornerRadius: CGFloat {
             get {
                 return layer.cornerRadius
             }
@@ -152,7 +150,7 @@
             }
         }
         
-        @IBInspectable public var shadowRadius: CGFloat {
+        @IBInspectable public override var shadowRadius: CGFloat {
             get {
                 return layer.shadowRadius
             }
@@ -162,7 +160,7 @@
             }
         }
         
-        @IBInspectable public var shadowOpacity: Float {
+        @IBInspectable public override var shadowOpacity: Float {
             get {
                 return layer.shadowOpacity
             }
@@ -173,7 +171,7 @@
         }
         
         
-        @IBInspectable public var shadowColor: UIColor? {
+        @IBInspectable public override var shadowColor: UIColor? {
             get {
                 guard let cgShadowColor = layer.shadowColor else { return nil }
                 return UIColor(cgColor: cgShadowColor)
@@ -184,7 +182,7 @@
             }
         }
         
-        @IBInspectable public var rotation: CGFloat {
+        @IBInspectable public override var rotation: CGFloat {
             get {
                 let radians = atan2(transform.b, transform.d)
                 return radians * (180.0 / CGFloat(M_PI))
@@ -195,7 +193,7 @@
             }
         }
         
-        @IBInspectable public var borderColor: UIColor? {
+        @IBInspectable public override var borderColor: UIColor? {
             get {
                 return (layer.borderColor != nil ? UIColor(cgColor: layer.borderColor!) : nil)
             }
@@ -205,7 +203,7 @@
             }
         }
         
-        @IBInspectable public var borderWidth: CGFloat {
+        @IBInspectable public override var borderWidth: CGFloat {
             get {
                 return layer.borderWidth
             }
@@ -215,7 +213,7 @@
             }
         }
         
-        public func updateLayerEffects() {
+        public override func updateLayerEffects() {
             if shadowOpacity != 0 {
                 layer.shadowOffset  = CGSize(width: 0, height: 0);
                 layer.masksToBounds = false
