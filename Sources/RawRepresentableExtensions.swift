@@ -6,13 +6,13 @@
 //
 //
 
-enum RawRepresentableInitError: Error {
+public enum RawRepresentableInitError: Error {
     case invalidValue(Any)
 }
 
-extension RawRepresentable {
+public extension RawRepresentable {
     
-    init(rawValue: RawValue) throws {
+    public init(rawValue: RawValue) throws {
         guard let value = Self(rawValue: rawValue) else {
             throw RawRepresentableInitError.invalidValue(rawValue)
         }
