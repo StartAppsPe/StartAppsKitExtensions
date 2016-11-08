@@ -27,7 +27,7 @@ public extension URLRequest {
     #if os(iOS)
     
     public mutating func setHttpBody(_ body: UIImage) throws {
-        let data = UIImagePNGRepresentation(body)
+        let data = UIImagePNGRepresentation(body)!
         self.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
         self.setValue("\(data.count)", forHTTPHeaderField: "Content-Length")
         self.httpMethod = "POST"
