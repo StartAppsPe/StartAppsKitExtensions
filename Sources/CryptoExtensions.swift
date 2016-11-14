@@ -7,7 +7,7 @@ import Foundation
     import Darwin
 #endif
 
-func random(_ range: ClosedRange<Int>) -> Int {
+public func random(_ range: ClosedRange<Int>) -> Int {
     let (min, max) = (Int(range.lowerBound), Int(range.upperBound))
     #if os(Linux) || os(FreeBSD)
         return min + Int(random() % ((max - min) + 1))
@@ -16,7 +16,7 @@ func random(_ range: ClosedRange<Int>) -> Int {
     #endif
 }
 
-func random(_ count: Int) -> Int {
+public func random(_ count: Int) -> Int {
     return random(0...count-1)
 }
 
@@ -31,7 +31,7 @@ public class Crypto {
         return bytes
     }
     
-    private static func random(numBytes: Int) -> [UInt8] {
+    public static func random(numBytes: Int) -> [UInt8] {
         let readBytes = read(numBytes: numBytes)
         return unsafeBitCast(readBytes, to: [UInt8].self)
     }

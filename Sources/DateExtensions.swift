@@ -30,7 +30,7 @@ let TimeIntervalDay:    TimeInterval = 86400
 let TimeIntervalWeek:   TimeInterval = 604800
 let TimeIntervalYear:   TimeInterval = 31556926
 
-let DateComponents: Set<Calendar.Component> = [
+let CalendarComponents: Set<Calendar.Component> = [
     .year, .month, .day, .weekOfYear, .weekday, .weekdayOrdinal, .hour, .minute, .second
 ]
 
@@ -335,12 +335,12 @@ public extension Date {
     // MARK: Decomposing Date Methods
     /********************************************************************************************************/
     
-    fileprivate func components(locale: String? = nil) -> Foundation.DateComponents {
+    fileprivate func components(locale: String? = nil) -> Foundation.CalendarComponents {
         var calendar = Calendar.current
         if let locale = locale {
             calendar.locale = Locale(identifier: locale)
         }
-        return calendar.dateComponents(DateComponents, from: self)
+        return calendar.dateComponents(CalendarComponents, from: self)
     }
     
     public func nearestHour(locale: String? = nil) -> Int {
