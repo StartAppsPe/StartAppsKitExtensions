@@ -141,6 +141,13 @@ public extension String {
         }
         return index
     }
+    
+    public func addPaddingAfter(_ length: Int) -> String {
+        let paddingCount = max(length-self.characters.count, 0)
+        let paddingString = String(repeating: " ", count: paddingCount)
+        return self+paddingString
+    }
+    
 }
 
 

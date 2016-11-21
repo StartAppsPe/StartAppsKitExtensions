@@ -335,7 +335,7 @@ public extension Date {
     // MARK: Decomposing Date Methods
     /********************************************************************************************************/
     
-    fileprivate func components(locale: String? = nil) -> Foundation.CalendarComponents {
+    fileprivate func components(locale: String? = nil) -> Foundation.DateComponents {
         var calendar = Calendar.current
         if let locale = locale {
             calendar.locale = Locale(identifier: locale)
