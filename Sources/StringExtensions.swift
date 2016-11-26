@@ -76,9 +76,9 @@ public extension String {
         return trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
     }
     
-    public func clean(minSize: Int = 0) -> String? {
+    public func clean(minSize: Int = 1) -> String? {
         let trimmed = trim()
-        return (trimmed.length > minSize ? trimmed : nil)
+        return (trimmed.length >= minSize ? trimmed : nil)
     }
     
     public func urlEncode() -> String {
