@@ -117,12 +117,12 @@ public extension UIButton {
 
 public extension UIGestureRecognizer {
     
-    public convenience init(action: ((_ sender: AnyObject) -> Void)?) {
+    public convenience init(action: ((_ sender: Any) -> Void)?) {
         self.init()
         setAction(action)
     }
     
-    public func setAction(_ action: ((_ sender: AnyObject) -> Void)?) {
+    public func setAction(_ action: ((_ sender: Any) -> Void)?) {
         if let action = action {
             self.removeTarget(self, action: nil)
             self.addTarget(self, action: #selector(UIGestureRecognizer.performAction))
@@ -146,7 +146,7 @@ public extension UIGestureRecognizer {
 
 public extension UIControl {
     
-    public func setAction(controlEvents: UIControlEvents, action: ((_ sender: AnyObject) -> Void)?) {
+    public func setAction(controlEvents: UIControlEvents, action: ((_ sender: Any) -> Void)?) {
         if let action = action {
             self.removeTarget(self, action: nil, for: controlEvents)
             self.addTarget(self, action: #selector(UIControl.performAction), for: controlEvents)
@@ -170,7 +170,7 @@ public extension UIControl {
 
 public extension UIRefreshControl {
     
-    public convenience init(color: UIColor? = nil, action: ((_ sender: AnyObject) -> Void)?) {
+    public convenience init(color: UIColor? = nil, action: ((_ sender: Any) -> Void)?) {
         self.init()
         setAction(action)
         if let color = color {
@@ -178,24 +178,24 @@ public extension UIRefreshControl {
         }
     }
     
-    public func setAction(_ action: ((_ sender: AnyObject) -> Void)?) {
+    public func setAction(_ action: ((_ sender: Any) -> Void)?) {
         setAction(controlEvents: .valueChanged, action: action)
     }
     
 }
 
 
-public extension UIButton {
-    
-    public func setAction(_ action: ((_ sender: AnyObject) -> Void)?) {
-        setAction(controlEvents: .touchUpInside, action: action)
-    }
+    public extension UIButton {
+        
+        public func setAction(_ action: @escaping ((_ sender: Any) -> Void)) {
+            setAction(controlEvents: .touchUpInside, action: action)
+        }
     
 }
 
 public extension UIBarButtonItem {
     
-    public convenience init(barButtonSystemItem systemItem: UIBarButtonSystemItem, action: ((_ sender: AnyObject) -> Void)?) {
+    public convenience init(barButtonSystemItem systemItem: UIBarButtonSystemItem, action: ((_ sender: Any) -> Void)?) {
         self.init(barButtonSystemItem: systemItem, target: nil, action: #selector(UIBarButtonItem.performAction))
         if let action = action {
             self.closuresWrapper = ClosureWrapper(action: action)
@@ -203,7 +203,7 @@ public extension UIBarButtonItem {
         }
     }
     
-    public convenience init(image: UIImage?, style: UIBarButtonItemStyle, action: ((_ sender: AnyObject) -> Void)?) {
+    public convenience init(image: UIImage?, style: UIBarButtonItemStyle, action: ((_ sender: Any) -> Void)?) {
         self.init(image: image, style: style, target: nil, action: #selector(UIBarButtonItem.performAction))
         if let action = action {
             self.closuresWrapper = ClosureWrapper(action: action)
@@ -211,7 +211,7 @@ public extension UIBarButtonItem {
         }
     }
     
-    public convenience init(title: String?, style: UIBarButtonItemStyle, action: ((_ sender: AnyObject) -> Void)?) {
+    public convenience init(title: String?, style: UIBarButtonItemStyle, action: ((_ sender: Any) -> Void)?) {
         self.init(title: title, style: style, target: nil, action: #selector(UIBarButtonItem.performAction))
         if let action = action {
             self.closuresWrapper = ClosureWrapper(action: action)
@@ -231,8 +231,8 @@ public extension UIBarButtonItem {
 }
 
 private final class ClosureWrapper {
-    fileprivate var action: (_ sender: AnyObject) -> Void
-    init(action: @escaping (_ sender: AnyObject) -> Void) {
+    fileprivate var action: (_ sender: Any) -> Void
+    init(action: @escaping (_ sender: Any) -> Void) {
         self.action = action
     }
 }

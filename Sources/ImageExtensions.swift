@@ -190,7 +190,15 @@
             return outputImage
         }
         
-        public func sizeWithLimits(_ width: CGFloat? = nil, height: CGFloat? = nil) -> CGSize {
+    }
+    
+    public enum ImageResizeMode {
+        case stretch, minSize, maxSize, aspectFill
+    }
+    
+    public extension UIImage {
+    
+        public func sizeWithLimits(width: CGFloat? = nil, height: CGFloat? = nil) -> CGSize {
             print("widthA: \(width), heightA: \(height)")
             let imageSize = size
             if let width = width , height == nil {
@@ -207,6 +215,47 @@
             print("widthB: \(imageSize.width), heightB: \(imageSize.height)")
             return imageSize
         }
+        
+        public func resize(size targetSize: CGSize, mode: ImageResizeMode = .stretch) -> UIImage {
+            let contextSize: CGSize
+            let drawSize: CGSize
+            var drawOrigin: CGPoint = CGPoint.zero
+            switch mode {
+            case .stretch:
+                contextSize = targetSize
+                drawSize = targetSize
+            case .minSize:
+                let widthRatio    = targetSize.width  / self.size.width
+                let heightRatio   = targetSize.height / self.size.height
+                let scalingFactor = max(widthRatio, heightRatio)
+                drawSize = CGSize(width:  self.size.width  * scalingFactor,
+                                  height: self.size.height * scalingFactor)
+                contextSize = drawSize
+            case .maxSize:
+                contextSize = targetSize
+                drawSize = targetSize
+            case .aspectFill:
+                let widthRatio    = targetSize.width  / self.size.width
+                let heightRatio   = targetSize.height / self.size.height
+                let scalingFactor = max(widthRatio, heightRatio)
+                drawSize = CGSize(width:  self.size.width  * scalingFactor,
+                                  height: self.size.height * scalingFactor)
+                drawOrigin = CGPoint(x: (targetSize.width  - drawSize.width)  / 2,
+                                     y: (targetSize.height - drawSize.height) / 2)
+                contextSize = targetSize
+            }
+            UIGraphicsBeginImageContext(contextSize);
+            self.draw(in: CGRect(origin: drawOrigin, size: drawSize))
+            let newImage = UIGraphicsGetImageFromCurrentImageContext()!
+            UIGraphicsEndImageContext()
+            return newImage
+        }
+        
+        public func resize(percentage: CGFloat) -> UIImage {
+            let newSize = CGSize(width: size.width * percentage, height: size.height * percentage)
+            return resize(size: newSize)
+        }
+        
     }
     
     public extension UIImage {
@@ -229,6 +278,13 @@
                 imageData = UIImageJPEGRepresentation(self, 1.0)!
                 mimeType = "image/jpeg"
             }
+            let imageDataString = imageData.base64EncodedString()
+            return "data:\(mimeType);base64,\(imageDataString)"
+        }
+        
+        public var jpegDataUri: String {
+            let imageData = UIImageJPEGRepresentation(self, 1.0)!
+            let mimeType = "image/jpeg"
             let imageDataString = imageData.base64EncodedString()
             return "data:\(mimeType);base64,\(imageDataString)"
         }

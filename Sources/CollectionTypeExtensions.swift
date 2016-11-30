@@ -37,6 +37,12 @@ public extension Collection where Index == Int  {
         return self[random(Int(count.toIntMax()))]
     }
     
+    public func contains(index: Int) -> Bool {
+        guard index >= 0 else { return false }
+        guard index < Int(count.toIntMax()) else { return false }
+        return true
+    }
+    
 }
 
 public extension MutableCollection where Index == Int  {

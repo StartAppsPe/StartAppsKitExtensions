@@ -324,4 +324,18 @@
         
     }
     
+    public extension UITableView {
+        
+        func hideBottomSeparators(showLast: Bool = false) {
+            let inset = separatorInset.left
+            tableFooterView = UIView(frame: CGRect(x: inset, y: 0, width: frame.size.width-inset, height: 0.5))
+            tableFooterView!.backgroundColor = showLast ? separatorColor : UIColor.clear
+        }
+        
+        func showBottomSeparators() {
+            tableFooterView = nil
+        }
+        
+    }
+    
 #endif
