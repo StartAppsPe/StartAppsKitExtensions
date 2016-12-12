@@ -12,7 +12,7 @@ import UIKit
 
 public extension UIDevice {
     
-    public static var platform: String {
+    public var platform: String {
         var size: Int = 0
         sysctlbyname("hw.machine", nil, &size, nil, 0)
         var machine = [CChar](repeating: 0, count: Int(size))
@@ -20,7 +20,7 @@ public extension UIDevice {
         return String(cString: machine)
     }
     
-    public static var platformString: String {
+    public var platformString: String {
         let platform = self.platform
         switch platform {
         case "iPhone1,1": return "iPhone 1G"
