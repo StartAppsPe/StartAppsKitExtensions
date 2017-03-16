@@ -13,7 +13,7 @@ import UIKit
 public extension UIDevice {
     
     public var isSimulator: Bool {
-        return self.model == "iPhone Simulator"
+        return self.platformString == "Simulator"
     }
     
     public var platform: String {
