@@ -34,7 +34,7 @@ public extension Collection {
 public extension Collection where Index == Int  {
     
     public var randomElement: Self.Iterator.Element? {
-        return self[random(Int(count.toIntMax()))]
+        return self[Random.new(max: Int(count.toIntMax()))]
     }
     
     public func contains(index: Int) -> Bool {
@@ -50,7 +50,7 @@ public extension MutableCollection where Index == Int  {
     public mutating func shuffle() {
         if count < 2 { return }
         for i in 0..<Int(count.toIntMax()-1) {
-            let j = random(Int(count.toIntMax()) - i) + i
+            let j = Random.new(max: Int(count.toIntMax()) - i) + i
             guard i != j else { continue }
             swap(&self[i], &self[j])
         }

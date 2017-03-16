@@ -12,6 +12,10 @@ import UIKit
 
 public extension UIDevice {
     
+    public var isSimulator: Bool {
+        return self.model == "iPhone Simulator"
+    }
+    
     public var platform: String {
         var size: Int = 0
         sysctlbyname("hw.machine", nil, &size, nil, 0)

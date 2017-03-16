@@ -7,17 +7,25 @@ import Foundation
     import Darwin
 #endif
 
-public func random(_ range: ClosedRange<Int>) -> Int {
-    let (min, max) = (Int(range.lowerBound), Int(range.upperBound))
-    #if os(Linux) || os(FreeBSD)
-        return min + Int(random() % ((max - min) + 1))
-    #else
-        return min + Int(arc4random_uniform(UInt32(max - min + 1)))
-    #endif
-}
-
-public func random(_ count: Int) -> Int {
-    return random(0...count-1)
+public class Random {
+    
+    public static func new(range: ClosedRange<Int>) -> Int {
+        let (min, max) = (Int(range.lowerBound), Int(range.upperBound))
+        #if os(Linux) || os(FreeBSD)
+            return min + Int(random() % ((max - min) + 1))
+        #else
+            return min + Int(arc4random_uniform(UInt32(max - min + 1)))
+        #endif
+    }
+    
+    public static func new(count: Int) -> Int {
+        return new(range: 0...count-1)
+    }
+    
+    public static func new(max: Int) -> Int {
+        return new(range: 0...max)
+    }
+    
 }
 
 public class Crypto {

@@ -106,6 +106,10 @@ public extension UIColor {
         self.init(red: CGFloat(r)/255, green: CGFloat(g)/255, blue: CGFloat(b)/255, alpha: CGFloat(a)/255)
     }
     
+    public static var random: UIColor {
+        return UIColor(r: Random.new(max: 256), g: Random.new(max: 256), b: Random.new(max: 256))
+    }
+    
     public static var flatLightTurquoise: UIColor {
         return UIColor(r: 26, g: 188, b: 156)
     }
