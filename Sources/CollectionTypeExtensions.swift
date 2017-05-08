@@ -120,17 +120,23 @@ public extension RangeReplaceableCollection where Iterator.Element: Equatable {
         }
     }
     
-    public mutating func remove(_ element: Self.Iterator.Element) {
+    @discardableResult
+    public mutating func remove(_ element: Self.Iterator.Element) -> Bool {
         if let index = index(of: element) {
             self.remove(at: index)
+            return true
         }
+        return false
     }
     
-    public mutating func toggle(_ element: Self.Iterator.Element) {
+    @discardableResult
+    public mutating func toggle(_ element: Self.Iterator.Element) -> Bool {
         if let index = index(of: element) {
             self.remove(at: index)
+            return false
         } else {
-            append(element)
+            self.append(element)
+            return true
         }
     }
     

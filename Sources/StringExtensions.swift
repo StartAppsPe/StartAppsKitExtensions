@@ -85,6 +85,10 @@ public extension String {
         return addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)!
     }
     
+    public mutating func capitalizeFirst() {
+        self.uppercaseFirst()
+    }
+    
     public mutating func uppercaseFirst() {
         guard length > 0 else { return }
         self.replaceSubrange(startIndex...startIndex, with: String(self[startIndex]).uppercased())
@@ -95,7 +99,14 @@ public extension String {
         self.replaceSubrange(startIndex...startIndex, with: String(self[startIndex]).lowercased())
     }
     
+    public var capitalizedFirst: String {
+        return self.uppercasedFirst()
+    }
+    
     public func uppercasedFirst() -> String {
+        let ddd = "ddd"
+        ddd.capitalized
+        
         guard length > 0 else { return self }
         let first = self.substring(end: 1)
         let rest = self.substring(start: 1)
