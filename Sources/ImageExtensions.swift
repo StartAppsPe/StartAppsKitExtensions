@@ -61,11 +61,11 @@
                 return nil
             }
             if maskImage != nil && maskImage!.cgImage == nil {
-                print("*** error: maskImage must be backed by a CGImage: \(maskImage)")
+                print("*** error: maskImage must be backed by a CGImage: \(maskImage!)")
                 return nil
             }
             
-            let __FLT_EPSILON__ = CGFloat(FLT_EPSILON)
+            let __FLT_EPSILON__ = CGFloat(Float.ulpOfOne)
             let screenScale = UIScreen.main.scale
             let imageRect = CGRect(origin: CGPoint.zero, size: size)
             var effectImage = self
@@ -199,14 +199,14 @@
     public extension UIImage {
     
         public func sizeWithLimits(width: CGFloat? = nil, height: CGFloat? = nil) -> CGSize {
-            print("widthA: \(width), heightA: \(height)")
+            print("widthA: \(width ?? "-"), heightA: \(height ?? "-")")
             let imageSize = size
-            if let width = width , height == nil {
+            if let width = width, height == nil {
                 let ratio = imageSize.width/width
                 let newHeight = imageSize.height/ratio
                 print("widthB: \(width), heightB: \(newHeight)")
                 return CGSize(width: width, height: newHeight)
-            } else if let height = height , width == nil {
+            } else if let height = height, width == nil {
                 let ratio = imageSize.height/height
                 let newWidth = imageSize.width/ratio
                 print("widthB: \(newWidth), heightB: \(height)")

@@ -244,7 +244,7 @@ public extension String {
         }
         
         var htmlAttributedString: NSAttributedString {
-            let stringData = data(using: .utf8) ?? data(using: .unicode) ?? data(using: .isoLatin1)!
+            let stringData = data(using: .isoLatin1) ?? data(using: .unicode) ?? data(using: .utf8)!
             return try! NSAttributedString(
                 data: stringData,
                 options: [NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType],
