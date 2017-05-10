@@ -33,7 +33,7 @@ public class Crypto {
     private static func read(numBytes: Int) -> [Int8] {
         var bytes = [Int8](repeating: 0, count: numBytes + 1)
         let randomFile = fopen("/dev/urandom", "r")
-        fgets(&bytes, numBytes+1, randomFile)
+        fgets(&bytes, Int32(numBytes+1), randomFile)
         fclose(randomFile)
         bytes.removeLast()
         return bytes

@@ -102,7 +102,7 @@
                 if hasBlur {
                     
                     let inputRadius = blurRadius * screenScale
-                    let piRoot = CGFloat(sqrt(2 * M_PI))
+                    let piRoot = CGFloat(sqrt(2 * Double.pi))
                     let pisomething2 = 3.0 * piRoot / 4
                     var radius = UInt32(floor(inputRadius * pisomething2 + 0.5))
                     if radius % 2 != 1 {

@@ -49,7 +49,7 @@ public extension MutableCollection where Index == Int  {
     
     public mutating func shuffle() {
         if count < 2 { return }
-        for i in 0..<Int(count.toIntMax()-1) {
+        for i in 0..<Int(count.toIntMax())-1 {
             let j = Random.new(max: Int(count.toIntMax()) - i) + i
             guard i != j else { continue }
             swap(&self[i], &self[j])

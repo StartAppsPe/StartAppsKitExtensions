@@ -10,9 +10,9 @@
     
     import UIKit
     
-    extension UIApplication {
+    public extension UIApplication {
         
-        var currentViewController: UIViewController? {
+        public var currentViewController: UIViewController? {
             var isFinal = false
             var rootViewController = UIApplication.shared.keyWindow?.rootViewController
             while (!isFinal) {
@@ -38,7 +38,7 @@
     public extension UIDevice {
         
         public var isSimulator: Bool {
-            return self.platformString == "Simulator"
+            return self.platformString.contains("Simulator")
         }
         
         public var platform: String {

@@ -14,10 +14,6 @@ public extension String {
         return self.characters.count
     }
     
-    public func stringByRemovingHTML() -> String {
-        return replacingOccurrences(of: "<[^>]+>", with: "", options: .regularExpression, range: nil)
-    }
-    
     public func substring(range: Range<Int>) -> String {
         let startIndex = self.characters.index(self.startIndex, offsetBy: range.lowerBound)
         let endIndex = self.characters.index(startIndex, offsetBy: range.upperBound - range.lowerBound)
@@ -81,10 +77,6 @@ public extension String {
         return (trimmed.length >= minSize ? trimmed : nil)
     }
     
-    public func urlEncode() -> String {
-        return addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)!
-    }
-    
     public mutating func capitalizeFirst() {
         self.uppercaseFirst()
     }
@@ -104,9 +96,6 @@ public extension String {
     }
     
     public func uppercasedFirst() -> String {
-        let ddd = "ddd"
-        ddd.capitalized
-        
         guard length > 0 else { return self }
         let first = self.substring(end: 1)
         let rest = self.substring(start: 1)
@@ -161,33 +150,77 @@ public extension String {
     
 }
 
+public extension String {
+    
+    public func urlEncode() -> String {
+        return addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)!
+    }
+    
+    public func jsonEncode() -> String {
+        var encoded = self
+        encoded = encoded.replacingOccurrences(of: "\\", with: "\\\\")
+        encoded = encoded.replacingOccurrences(of: "\"", with: "\\\"")
+        return encoded
+    }
+    
+    public func xmlEncode() -> String {
+        var encoded = self
+        encoded = encoded.replacingOccurrences(of: "&", with: "&amp;")
+        encoded = encoded.replacingOccurrences(of: "\"", with: "&quot;")
+        encoded = encoded.replacingOccurrences(of: "'", with: "&#39;")
+        encoded = encoded.replacingOccurrences(of: ">", with: "&gt;")
+        encoded = encoded.replacingOccurrences(of: "<", with: "&lt;")
+        return encoded
+    }
+    
+    public func htmlEncode() -> String {
+        var encoded = self
+        encoded = encoded.replacingOccurrences(of: "&", with: "&amp;")
+        encoded = encoded.replacingOccurrences(of: "\"", with: "&quot;")
+        encoded = encoded.replacingOccurrences(of: "'", with: "&#39;")
+        encoded = encoded.replacingOccurrences(of: ">", with: "&gt;")
+        encoded = encoded.replacingOccurrences(of: "<", with: "&lt;")
+        return encoded
+    }
+    
+    public func removingHTML() -> String {
+        return replacingOccurrences(of: "<[^>]+>", with: "", options: .regularExpression, range: nil)
+    }
+    
+    // Legacy support
+    public func stringByRemovingHTML() -> String {
+        return self.removingHTML()
+    }
+    
+}
 
-enum StringParsingError: Error {
+
+public enum StringParsingError: Error {
     case failedToProcessBytes, failedToProcessData, failedToConvertToData
 }
 
 public extension String {
     
-    init(bytes: [UInt8]) throws {
+    public init(bytes: [UInt8]) throws {
         guard let parsedString = String(bytes: bytes, encoding: .utf8) else {
             throw StringParsingError.failedToProcessBytes
         }
         self = parsedString
     }
     
-    func bytes() throws -> [UInt8] {
+    public func bytes() throws -> [UInt8] {
         let data = try self.data()
         return [UInt8](data)
     }
     
-    init(data: Data) throws {
+    public init(data: Data) throws {
         guard let parsedString = String(data: data, encoding: .utf8) else {
             throw StringParsingError.failedToProcessData
         }
         self = parsedString
     }
     
-    func data() throws -> Data {
+    public func data() throws -> Data {
         guard let parsedData = self.data(using: .utf8) else {
             throw StringParsingError.failedToConvertToData
         }
@@ -204,7 +237,19 @@ public extension String {
             let paragraphStyle = NSMutableParagraphStyle()
             paragraphStyle.lineBreakMode = .byWordWrapping
             paragraphStyle.alignment = .justified
-            return NSAttributedString(string: self, attributes: [NSParagraphStyleAttributeName : paragraphStyle, NSBaselineOffsetAttributeName : 0])
+            return NSAttributedString(
+                string: self,
+                attributes: [NSParagraphStyleAttributeName: paragraphStyle, NSBaselineOffsetAttributeName: 0]
+            )
+        }
+        
+        var htmlAttributedString: NSAttributedString {
+            let stringData = data(using: .utf8) ?? data(using: .unicode) ?? data(using: .isoLatin1)!
+            return try! NSAttributedString(
+                data: stringData,
+                options: [NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType],
+                documentAttributes: nil
+            )
         }
         
     }

@@ -95,10 +95,10 @@
         @IBInspectable public var rotation: CGFloat {
             get {
                 let radians = atan2(transform.b, transform.d)
-                return radians * (180.0 / CGFloat(M_PI))
+                return radians * (180.0 / CGFloat(Double.pi))
             }
             set {
-                let radians = newValue * (CGFloat(M_PI) / 180.0)
+                let radians = newValue * (CGFloat(Double.pi) / 180.0)
                 transform = CGAffineTransform(rotationAngle: radians)
             }
         }
@@ -185,10 +185,10 @@
         @IBInspectable public override var rotation: CGFloat {
             get {
                 let radians = atan2(transform.b, transform.d)
-                return radians * (180.0 / CGFloat(M_PI))
+                return radians * (180.0 / CGFloat(Double.pi))
             }
             set {
-                let radians = newValue * (CGFloat(M_PI) / 180.0)
+                let radians = newValue * (CGFloat(Double.pi) / 180.0)
                 transform = CGAffineTransform(rotationAngle: radians)
             }
         }
