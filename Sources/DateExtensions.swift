@@ -459,7 +459,7 @@ public enum DayOfWeek: Int, Equatable {
     case monday = 0, tuesday, wednesday, thursday, friday, saturday, sunday
     
     public init?(string: String) {
-        switch string.uppercased().trim() {
+        switch string.uppercased().trimmed {
         case "LUNES":     self = .monday
         case "MARTES":    self = .tuesday
         case "MIERCOLES": self = .wednesday
@@ -476,6 +476,34 @@ public enum DayOfWeek: Int, Equatable {
         case "FRIDAY":    self = .friday
         case "SATURDAY":  self = .saturday
         case "SUNDAY":    self = .sunday
+        case "LU":        self = .monday
+        case "MA":        self = .tuesday
+        case "MI":        self = .wednesday
+        case "JU":        self = .thursday
+        case "VI":        self = .friday
+        case "SA":        self = .saturday
+        case "DO":        self = .sunday
+        case "LUN":       self = .monday
+        case "MAR":       self = .tuesday
+        case "MIE":       self = .wednesday
+        case "JUE":       self = .thursday
+        case "VIE":       self = .friday
+        case "SAB":       self = .saturday
+        case "DOM":       self = .sunday
+        case "MO":        self = .monday
+        case "TU":        self = .tuesday
+        case "WE":        self = .wednesday
+        case "TH":        self = .thursday
+        case "FR":        self = .friday
+        case "SA":        self = .saturday
+        case "SU":        self = .sunday
+        case "MON":       self = .monday
+        case "TUE":       self = .tuesday
+        case "WED":       self = .wednesday
+        case "THU":       self = .thursday
+        case "FRI":       self = .friday
+        case "SAT":       self = .saturday
+        case "SUN":       self = .sunday
         default:          return nil
         }
     }
@@ -492,11 +520,31 @@ public enum DayOfWeek: Int, Equatable {
         }
     }
     
+    public var sundayFirstRawValue: Int {
+        var alternateRawValue = rawValue+1
+        if alternateRawValue > 7 { alternateRawValue -= alternateRawValue }
+        return alternateRawValue
+    }
+    
     // TODO: Should this be here?
     public var alternateRawValue: Int {
         var alternateRawValue = rawValue+2
         if alternateRawValue > 7 { alternateRawValue -= alternateRawValue }
         return alternateRawValue
+    }
+    
+    
+    /// Returns wether day of week is in the weekend. Includes friday as weekend.
+    public var isWeekend: Bool {
+        switch self {
+        case .monday:    return false
+        case .tuesday:   return false
+        case .wednesday: return false
+        case .thursday:  return false
+        case .friday:    return true
+        case .saturday:  return true
+        case .sunday:    return true
+        }
     }
     
 }

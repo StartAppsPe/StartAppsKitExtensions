@@ -34,7 +34,7 @@ public extension Collection {
 public extension Collection where Index == Int  {
     
     public var randomElement: Self.Iterator.Element? {
-        return self[Random.new(max: Int(count.toIntMax()))]
+        return self[Random.new(max: Int(count.toIntMax())-1)]
     }
     
     public func contains(index: Int) -> Bool {

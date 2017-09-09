@@ -6,13 +6,13 @@
 //  Copyright (c) 2015 is.oto.pe. All rights reserved.
 //
 
-import Foundation
+import SwifterSwift
 
 public extension String {
     
-    public var length: Int {
-        return self.characters.count
-    }
+//    public var length: Int {
+//        return self.characters.count
+//    }
     
     public func substring(range: Range<Int>) -> String {
         let startIndex = self.characters.index(self.startIndex, offsetBy: range.lowerBound)
@@ -68,13 +68,24 @@ public extension String {
         return nil
     }
     
-    public func trim() -> String {
-        return trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+//    public func trim() -> String {
+//        return self.trimmed
+//    }
+    
+    public func trimmed() -> String {
+        return self.trimmed
     }
     
+    
+    @available(*, deprecated: 2.0, message: "Use cleaned() instead", renamed: "clean(minSize:)")
     public func clean(minSize: Int = 1) -> String? {
-        let trimmed = trim()
-        return (trimmed.length >= minSize ? trimmed : nil)
+        let trimmedSelf = trimmed
+        return (trimmedSelf.length >= minSize ? trimmedSelf : nil)
+    }
+    
+    public func cleaned(minSize: Int = 1) -> String? {
+        let trimmedSelf = trimmed
+        return (trimmedSelf.length >= minSize ? trimmedSelf : nil)
     }
     
     public mutating func capitalizeFirst() {
