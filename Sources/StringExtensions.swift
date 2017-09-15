@@ -7,6 +7,7 @@
 //
 
 import SwifterSwift
+import Foundation
 
 public extension String {
     
@@ -17,31 +18,33 @@ public extension String {
     public func substring(range: Range<Int>) -> String {
         let startIndex = self.characters.index(self.startIndex, offsetBy: range.lowerBound)
         let endIndex = self.characters.index(startIndex, offsetBy: range.upperBound - range.lowerBound)
-        return self.substring(with: startIndex..<endIndex)
+        return String(self[startIndex..<endIndex])
     }
     
     public func substring(start: Int) -> String {
-        return self.substring(range: start..<self.length)
+        return substring(start: start, end: self.length)
     }
     
     public func substring(end: Int) -> String {
-        return self.substring(range: 0..<end)
+        return substring(start: 0, end: end)
     }
     
     public func substring(start: Int, end: Int) -> String {
-        return self.substring(range: start..<end)
+        let startIndex = self.index(self.startIndex, offsetBy: start)
+        let endIndex = self.index(self.startIndex, offsetBy: end)
+        return String(self[startIndex..<endIndex])
     }
     
     public func substring(start: Index) -> String {
-        return self.substring(with: start..<self.endIndex)
+        return String(self[start..<self.endIndex])
     }
     
     public func substring(end: Index) -> String {
-        return self.substring(with: self.startIndex..<end)
+        return String(self[startIndex..<end])
     }
     
     public func substring(start: Index, end: Index) -> String {
-        return self.substring(with: start..<end)
+        return String(self[start..<end])
     }
     
     public func substring(start: String, end: String) -> String? {
@@ -68,9 +71,9 @@ public extension String {
         return nil
     }
     
-//    public func trim() -> String {
-//        return self.trimmed
-//    }
+    //    public func trim() -> String {
+    //        return self.trimmed
+    //    }
     
     public func trimmed() -> String {
         return self.trimmed
@@ -79,12 +82,12 @@ public extension String {
     
     @available(*, deprecated: 2.0, message: "Use cleaned() instead", renamed: "clean(minSize:)")
     public func clean(minSize: Int = 1) -> String? {
-        let trimmedSelf = trimmed
+        let trimmedSelf = trimmed()
         return (trimmedSelf.length >= minSize ? trimmedSelf : nil)
     }
     
     public func cleaned(minSize: Int = 1) -> String? {
-        let trimmedSelf = trimmed
+        let trimmedSelf = trimmed()
         return (trimmedSelf.length >= minSize ? trimmedSelf : nil)
     }
     
@@ -241,47 +244,52 @@ public extension String {
 }
 
 
-#if os(iOS)
-    public extension String {
-        
-        public func justifiedAttributed() -> NSAttributedString {
-            let paragraphStyle = NSMutableParagraphStyle()
-            paragraphStyle.lineBreakMode = .byWordWrapping
-            paragraphStyle.alignment = .justified
-            return NSAttributedString(
-                string: self,
-                attributes: [NSParagraphStyleAttributeName: paragraphStyle, NSBaselineOffsetAttributeName: 0]
-            )
-        }
-        
-        var htmlAttributedString: NSAttributedString {
-            let stringData = data(using: .isoLatin1) ?? data(using: .unicode) ?? data(using: .utf8)!
-            return try! NSAttributedString(
-                data: stringData,
-                options: [NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType],
-                documentAttributes: nil
-            )
-        }
-        
+import UIKit
+
+public extension String {
+    
+    public func justifiedAttributed() -> NSAttributedString {
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineBreakMode = .byWordWrapping
+        paragraphStyle.alignment = .justified
+        return NSAttributedString(
+            string: self,
+            attributes: [:
+                //NSAttributedStringKey.paragraphStyle: paragraphStyle,
+                //NSAttributedStringKey.baselineOffset: 0
+            ]
+        )
     }
     
-    public extension NSAttributedString {
-        
-        public convenience init(string: String, font: UIFont?, color: UIColor? = nil) {
-            var attributes = [String : AnyObject]()
-            if font  != nil { attributes[NSFontAttributeName] = font! }
-            if color != nil { attributes[NSForegroundColorAttributeName] = color! }
-            self.init(string: string, attributes: attributes)
-        }
-        
+    var htmlAttributedString: NSAttributedString {
+        let stringData = data(using: .isoLatin1) ?? data(using: .unicode) ?? data(using: .utf8)!
+        return try! NSAttributedString(
+            data: stringData,
+            options: [:
+                //NSAttributedString.DocumentReadingOptionKey.documentType: NSAttributedString.DocumentType.html
+            ],
+            documentAttributes: nil
+        )
     }
     
-    public extension NSMutableAttributedString {
-        
-        public func append(string: String, font: UIFont? = nil, color: UIColor? = nil) {
-            self.append(NSAttributedString(string: string, font: font, color: color))
-        }
-        
+}
+
+public extension NSAttributedString {
+    
+    public convenience init(string: String, font: UIFont?, color: UIColor? = nil) {
+        var attributes = [NSAttributedStringKey : Any]()
+        //if font  != nil { attributes[NSAttributedStringKey.font] = font! }
+        //if color != nil { attributes[NSAttributedStringKey.foregroundColor] = color! }
+        self.init(string: string, attributes: attributes as [String : Any])
     }
-#endif
+    
+}
+
+public extension NSMutableAttributedString {
+    
+    public func append(string: String, font: UIFont? = nil, color: UIColor? = nil) {
+        self.append(NSAttributedString(string: string, font: font, color: color))
+    }
+    
+}
 

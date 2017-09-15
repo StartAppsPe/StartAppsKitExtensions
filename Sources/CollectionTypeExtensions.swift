@@ -34,12 +34,12 @@ public extension Collection {
 public extension Collection where Index == Int  {
     
     public var randomElement: Self.Iterator.Element? {
-        return self[Random.new(max: Int(count.toIntMax())-1)]
+        return self[Random.new(max: Int(Int64(count))-1)]
     }
     
     public func contains(index: Int) -> Bool {
         guard index >= 0 else { return false }
-        guard index < Int(count.toIntMax()) else { return false }
+        guard index < Int(Int64(count)) else { return false }
         return true
     }
     
@@ -49,10 +49,10 @@ public extension MutableCollection where Index == Int  {
     
     public mutating func shuffle() {
         if count < 2 { return }
-        for i in 0..<Int(count.toIntMax())-1 {
-            let j = Random.new(max: Int(count.toIntMax()) - i) + i
+        for i in 0..<Int(Int64(count))-1 {
+            let j = Random.new(max: Int(Int64(count)) - i) + i
             guard i != j else { continue }
-            swap(&self[i], &self[j])
+            self.swapAt(i, j)
         }
     }
     

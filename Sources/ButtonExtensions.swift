@@ -6,7 +6,7 @@
 //
 //
 
-import SwifterSwift
+//import SwifterSwift
 
 #if os(iOS)
     
@@ -136,7 +136,7 @@ import SwifterSwift
             }
         }
         
-        public func performAction() {
+        @objc public func performAction() {
             self.closuresWrapper?.action(self)
         }
         
@@ -160,7 +160,7 @@ import SwifterSwift
             }
         }
         
-        public func performAction() {
+        @objc public func performAction() {
             self.closuresWrapper?.action(self)
         }
         
@@ -222,7 +222,7 @@ import SwifterSwift
             }
         }
         
-        public func performAction() {
+        @objc public func performAction() {
             self.closuresWrapper?.action(self)
         }
         

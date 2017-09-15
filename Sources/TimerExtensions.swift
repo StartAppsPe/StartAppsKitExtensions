@@ -23,7 +23,7 @@ public extension Timer {
             self.callback = callback
         }
         
-        func tick(_ timer: Timer) {
+        @objc func tick(_ timer: Timer) {
             callback(timer)
         }
     }

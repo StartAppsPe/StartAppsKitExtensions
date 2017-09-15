@@ -459,7 +459,7 @@ public enum DayOfWeek: Int, Equatable {
     case monday = 0, tuesday, wednesday, thursday, friday, saturday, sunday
     
     public init?(string: String) {
-        switch string.uppercased().trimmed {
+        switch string.uppercased().trimmed() {
         case "LUNES":     self = .monday
         case "MARTES":    self = .tuesday
         case "MIERCOLES": self = .wednesday

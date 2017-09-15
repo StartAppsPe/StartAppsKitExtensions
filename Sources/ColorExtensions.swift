@@ -8,7 +8,7 @@
 //  Version: 1.0
 //
 
-import SwifterSwift
+//import SwifterSwift
 
 #if os(iOS)
 
@@ -76,7 +76,7 @@ public extension UIColor {
     }
     
     public convenience init(hex: String) {
-        var cString:String = hex.trimmed.uppercased()
+        var cString:String = hex.trimmed().uppercased()
         if (cString.hasPrefix("#")) { cString = cString.substring(from: cString.characters.index(cString.startIndex, offsetBy: 1)) }
         if (cString.characters.count != 6) {
             self.init(red: 0.5, green: 0.0, blue: 0.5, alpha: 1.0)
