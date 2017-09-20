@@ -254,9 +254,9 @@ public extension String {
         paragraphStyle.alignment = .justified
         return NSAttributedString(
             string: self,
-            attributes: [:
-                //NSAttributedStringKey.paragraphStyle: paragraphStyle,
-                //NSAttributedStringKey.baselineOffset: 0
+            attributes: [
+                NSAttributedStringKey.paragraphStyle: paragraphStyle,
+                NSAttributedStringKey.baselineOffset: 0
             ]
         )
     }
@@ -265,8 +265,8 @@ public extension String {
         let stringData = data(using: .isoLatin1) ?? data(using: .unicode) ?? data(using: .utf8)!
         return try! NSAttributedString(
             data: stringData,
-            options: [:
-                //NSAttributedString.DocumentReadingOptionKey.documentType: NSAttributedString.DocumentType.html
+            options: [
+                NSAttributedString.DocumentReadingOptionKey.documentType: NSAttributedString.DocumentType.html
             ],
             documentAttributes: nil
         )
@@ -278,9 +278,9 @@ public extension NSAttributedString {
     
     public convenience init(string: String, font: UIFont?, color: UIColor? = nil) {
         var attributes = [NSAttributedStringKey : Any]()
-        //if font  != nil { attributes[NSAttributedStringKey.font] = font! }
-        //if color != nil { attributes[NSAttributedStringKey.foregroundColor] = color! }
-        self.init(string: string, attributes: attributes as [String : Any])
+        if font  != nil { attributes[NSAttributedStringKey.font] = font! }
+        if color != nil { attributes[NSAttributedStringKey.foregroundColor] = color! }
+        self.init(string: string, attributes: attributes)
     }
     
 }

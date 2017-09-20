@@ -44,6 +44,41 @@
         
     }
     
+    public extension UITableView {
+        
+        public func updateHeaderViewFrame() {
+            guard let headerView = self.tableHeaderView else { return }
+            headerView.setNeedsLayout()
+            headerView.layoutIfNeeded()
+            
+            let fitSize = CGSize(width: self.frame.size.width, height: 3000)
+            let height = headerView.systemLayoutSizeFitting(fitSize,
+                                                            withHorizontalFittingPriority: .required,
+                                                            verticalFittingPriority: .defaultLow).height
+            var headerViewFrame = headerView.frame
+            headerViewFrame.size.height = height
+            headerView.frame = headerViewFrame
+            self.tableHeaderView = headerView
+        }
+        
+        public func updateFooterViewFrame() {
+            guard let footerView = self.tableFooterView else { return }
+            footerView.setNeedsLayout()
+            footerView.layoutIfNeeded()
+            
+            let fitSize = CGSize(width: self.frame.size.width, height: 3000)
+            let height = footerView.systemLayoutSizeFitting(fitSize,
+                                                            withHorizontalFittingPriority: .required,
+                                                            verticalFittingPriority: .defaultLow).height
+            var footerViewFrame = footerView.frame
+            footerViewFrame.size.height = height
+            footerView.frame = footerViewFrame
+            self.tableFooterView = footerView
+        }
+        
+    }
+
+    
 //    public extension UIView {
 //        
 //        @IBInspectable public var cornerRadius: CGFloat {

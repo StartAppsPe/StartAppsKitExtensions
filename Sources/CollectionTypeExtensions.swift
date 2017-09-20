@@ -155,6 +155,7 @@ public extension RangeReplaceableCollection where Iterator.Element: Equatable {
 //}
 
 
-public func ~=<I : Comparable>(pattern: Range<I>, value: Range<I>) -> Bool where I : Comparable {
-    return pattern ~= value.lowerBound || pattern ~= value.upperBound || value ~= pattern.lowerBound || value ~= pattern.upperBound
-}
+//public func ~=<I : Comparable>(pattern: Range<I>, value: Range<I>) -> Bool where I : Comparable {
+//    return pattern ~= value.lowerBound || pattern ~= value.upperBound || value ~= pattern.lowerBound || value ~= pattern.upperBound
+//}
+

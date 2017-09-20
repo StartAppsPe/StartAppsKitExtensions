@@ -28,7 +28,6 @@ s.osx.deployment_target  = '10.10'
 s.source_files     = 'Sources'
 s.frameworks       = 'Foundation', 'UIKit'
 
-s.dependency 'SwifterSwift', :git => 'https://github.com/SwifterSwift/SwifterSwift.git', :branch => 'swift-4'
-
+s.dependency 'SwifterSwift', '~> 3.2'
 
 end
