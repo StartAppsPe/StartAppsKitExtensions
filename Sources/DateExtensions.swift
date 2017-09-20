@@ -72,6 +72,10 @@ public extension Date {
         self = date
     }
     
+    public var isoString: String {
+        return Date.isoDateFormatter.string(from: self)
+    }
+    
 }
 
 public extension Date {
