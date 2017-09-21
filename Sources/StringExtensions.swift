@@ -6,7 +6,6 @@
 //  Copyright (c) 2015 is.oto.pe. All rights reserved.
 //
 
-//import SwifterSwift
 import Foundation
 
 public extension String {
