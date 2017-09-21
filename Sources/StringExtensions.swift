@@ -6,14 +6,14 @@
 //  Copyright (c) 2015 is.oto.pe. All rights reserved.
 //
 
-import SwifterSwift
+//import SwifterSwift
 import Foundation
 
 public extension String {
     
-//    public var length: Int {
-//        return self.characters.count
-//    }
+    public var length: Int {
+        return self.characters.count
+    }
     
     public func substring(range: Range<Int>) -> String {
         let startIndex = self.characters.index(self.startIndex, offsetBy: range.lowerBound)

@@ -79,185 +79,185 @@
     }
 
     
-//    public extension UIView {
-//        
-//        @IBInspectable public var cornerRadius: CGFloat {
-//            get {
-//                return layer.cornerRadius
-//            }
-//            set {
-//                if newValue == -1 {
-//                    layer.cornerRadius = self.bounds.size.width/2
-//                } else {
-//                    layer.cornerRadius = newValue
-//                }
-//                updateLayerEffects()
-//            }
-//        }
-//        
-//        @IBInspectable public var shadowRadius: CGFloat {
-//            get {
-//                return layer.shadowRadius
-//            }
-//            set {
-//                layer.shadowRadius  = newValue;
-//                updateLayerEffects()
-//            }
-//        }
-//        
-//        @IBInspectable public var shadowOpacity: Float {
-//            get {
-//                return layer.shadowOpacity
-//            }
-//            set {
-//                layer.shadowOpacity = newValue
-//                updateLayerEffects()
-//            }
-//        }
-//        
-//        
-//        @IBInspectable public var shadowColor: UIColor? {
-//            get {
-//                guard let cgShadowColor = layer.shadowColor else { return nil }
-//                return UIColor(cgColor: cgShadowColor)
-//            }
-//            set {
-//                layer.shadowColor = newValue?.cgColor
-//                updateLayerEffects()
-//            }
-//        }
-//        
-//        @IBInspectable public var rotation: CGFloat {
-//            get {
-//                let radians = atan2(transform.b, transform.d)
-//                return radians * (180.0 / CGFloat(Double.pi))
-//            }
-//            set {
-//                let radians = newValue * (CGFloat(Double.pi) / 180.0)
-//                transform = CGAffineTransform(rotationAngle: radians)
-//            }
-//        }
-//        
-//        @IBInspectable public var borderColor: UIColor? {
-//            get {
-//                return (layer.borderColor != nil ? UIColor(cgColor: layer.borderColor!) : nil)
-//            }
-//            set {
-//                layer.borderColor = newValue?.cgColor
-//                updateLayerEffects()
-//            }
-//        }
-//        
-//        @IBInspectable public var borderWidth: CGFloat {
-//            get {
-//                return layer.borderWidth
-//            }
-//            set {
-//                layer.borderWidth = newValue
-//                updateLayerEffects()
-//            }
-//        }
-//        
-//        public func updateLayerEffects() {
-//            if shadowOpacity != 0 {
-//                layer.shadowOffset  = CGSize(width: 0, height: 0);
-//                layer.masksToBounds = false
-//            } else if cornerRadius != 0 {
-//                layer.masksToBounds = true
-//            }
-//        }
-//        
-//    }
+    public extension UIView {
+        
+        @IBInspectable public var cornerRadius: CGFloat {
+            get {
+                return layer.cornerRadius
+            }
+            set {
+                if newValue == -1 {
+                    layer.cornerRadius = self.bounds.size.width/2
+                } else {
+                    layer.cornerRadius = newValue
+                }
+                updateLayerEffects()
+            }
+        }
+        
+        @IBInspectable public var shadowRadius: CGFloat {
+            get {
+                return layer.shadowRadius
+            }
+            set {
+                layer.shadowRadius  = newValue;
+                updateLayerEffects()
+            }
+        }
+        
+        @IBInspectable public var shadowOpacity: Float {
+            get {
+                return layer.shadowOpacity
+            }
+            set {
+                layer.shadowOpacity = newValue
+                updateLayerEffects()
+            }
+        }
+        
+        
+        @IBInspectable public var shadowColor: UIColor? {
+            get {
+                guard let cgShadowColor = layer.shadowColor else { return nil }
+                return UIColor(cgColor: cgShadowColor)
+            }
+            set {
+                layer.shadowColor = newValue?.cgColor
+                updateLayerEffects()
+            }
+        }
+        
+        @IBInspectable public var rotation: CGFloat {
+            get {
+                let radians = atan2(transform.b, transform.d)
+                return radians * (180.0 / CGFloat(Double.pi))
+            }
+            set {
+                let radians = newValue * (CGFloat(Double.pi) / 180.0)
+                transform = CGAffineTransform(rotationAngle: radians)
+            }
+        }
+        
+        @IBInspectable public var borderColor: UIColor? {
+            get {
+                return (layer.borderColor != nil ? UIColor(cgColor: layer.borderColor!) : nil)
+            }
+            set {
+                layer.borderColor = newValue?.cgColor
+                updateLayerEffects()
+            }
+        }
+        
+        @IBInspectable public var borderWidth: CGFloat {
+            get {
+                return layer.borderWidth
+            }
+            set {
+                layer.borderWidth = newValue
+                updateLayerEffects()
+            }
+        }
+        
+        public func updateLayerEffects() {
+            if shadowOpacity != 0 {
+                layer.shadowOffset  = CGSize(width: 0, height: 0);
+                layer.masksToBounds = false
+            } else if cornerRadius != 0 {
+                layer.masksToBounds = true
+            }
+        }
+        
+    }
     
-//    public extension UIButton {
-//    
-//        @IBInspectable public override var cornerRadius: CGFloat {
-//            get {
-//                return layer.cornerRadius
-//            }
-//            set {
-//                if newValue == -1 {
-//                    layer.cornerRadius = self.bounds.size.width/2
-//                } else {
-//                    layer.cornerRadius = newValue
-//                }
-//                updateLayerEffects()
-//            }
-//        }
-//        
-//        @IBInspectable public override var shadowRadius: CGFloat {
-//            get {
-//                return layer.shadowRadius
-//            }
-//            set {
-//                layer.shadowRadius  = newValue;
-//                updateLayerEffects()
-//            }
-//        }
-//        
-//        @IBInspectable public override var shadowOpacity: Float {
-//            get {
-//                return layer.shadowOpacity
-//            }
-//            set {
-//                layer.shadowOpacity = newValue
-//                updateLayerEffects()
-//            }
-//        }
-//        
-//        
-//        @IBInspectable public override var shadowColor: UIColor? {
-//            get {
-//                guard let cgShadowColor = layer.shadowColor else { return nil }
-//                return UIColor(cgColor: cgShadowColor)
-//            }
-//            set {
-//                layer.shadowColor = newValue?.cgColor
-//                updateLayerEffects()
-//            }
-//        }
-//        
-//        @IBInspectable public override var rotation: CGFloat {
-//            get {
-//                let radians = atan2(transform.b, transform.d)
-//                return radians * (180.0 / CGFloat(Double.pi))
-//            }
-//            set {
-//                let radians = newValue * (CGFloat(Double.pi) / 180.0)
-//                transform = CGAffineTransform(rotationAngle: radians)
-//            }
-//        }
-//        
-//        @IBInspectable public override var borderColor: UIColor? {
-//            get {
-//                return (layer.borderColor != nil ? UIColor(cgColor: layer.borderColor!) : nil)
-//            }
-//            set {
-//                layer.borderColor = newValue?.cgColor
-//                updateLayerEffects()
-//            }
-//        }
-//        
-//        @IBInspectable public override var borderWidth: CGFloat {
-//            get {
-//                return layer.borderWidth
-//            }
-//            set {
-//                layer.borderWidth = newValue
-//                updateLayerEffects()
-//            }
-//        }
-//        
-//        public override func updateLayerEffects() {
-//            if shadowOpacity != 0 {
-//                layer.shadowOffset  = CGSize(width: 0, height: 0);
-//                layer.masksToBounds = false
-//            } else if cornerRadius != 0 {
-//                layer.masksToBounds = true
-//            }
-//        }
-//        
-//    }
+    public extension UIButton {
+    
+        @IBInspectable public override var cornerRadius: CGFloat {
+            get {
+                return layer.cornerRadius
+            }
+            set {
+                if newValue == -1 {
+                    layer.cornerRadius = self.bounds.size.width/2
+                } else {
+                    layer.cornerRadius = newValue
+                }
+                updateLayerEffects()
+            }
+        }
+        
+        @IBInspectable public override var shadowRadius: CGFloat {
+            get {
+                return layer.shadowRadius
+            }
+            set {
+                layer.shadowRadius  = newValue;
+                updateLayerEffects()
+            }
+        }
+        
+        @IBInspectable public override var shadowOpacity: Float {
+            get {
+                return layer.shadowOpacity
+            }
+            set {
+                layer.shadowOpacity = newValue
+                updateLayerEffects()
+            }
+        }
+        
+        
+        @IBInspectable public override var shadowColor: UIColor? {
+            get {
+                guard let cgShadowColor = layer.shadowColor else { return nil }
+                return UIColor(cgColor: cgShadowColor)
+            }
+            set {
+                layer.shadowColor = newValue?.cgColor
+                updateLayerEffects()
+            }
+        }
+        
+        @IBInspectable public override var rotation: CGFloat {
+            get {
+                let radians = atan2(transform.b, transform.d)
+                return radians * (180.0 / CGFloat(Double.pi))
+            }
+            set {
+                let radians = newValue * (CGFloat(Double.pi) / 180.0)
+                transform = CGAffineTransform(rotationAngle: radians)
+            }
+        }
+        
+        @IBInspectable public override var borderColor: UIColor? {
+            get {
+                return (layer.borderColor != nil ? UIColor(cgColor: layer.borderColor!) : nil)
+            }
+            set {
+                layer.borderColor = newValue?.cgColor
+                updateLayerEffects()
+            }
+        }
+        
+        @IBInspectable public override var borderWidth: CGFloat {
+            get {
+                return layer.borderWidth
+            }
+            set {
+                layer.borderWidth = newValue
+                updateLayerEffects()
+            }
+        }
+        
+        public override func updateLayerEffects() {
+            if shadowOpacity != 0 {
+                layer.shadowOffset  = CGSize(width: 0, height: 0);
+                layer.masksToBounds = false
+            } else if cornerRadius != 0 {
+                layer.masksToBounds = true
+            }
+        }
+        
+    }
     
     public extension UIView {
         

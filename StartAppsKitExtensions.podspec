@@ -28,6 +28,6 @@ s.osx.deployment_target  = '10.10'
 s.source_files     = 'Sources'
 s.frameworks       = 'Foundation', 'UIKit'
 
-s.dependency 'SwifterSwift', '~> 3.2'
+#s.dependency 'SwifterSwift', '~> 4.0'
 
 end
