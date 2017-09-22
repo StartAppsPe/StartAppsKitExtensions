@@ -26,7 +26,7 @@ s.ios.deployment_target  = '8.0'
 s.osx.deployment_target  = '10.10'
 
 s.source_files     = 'Sources'
-s.frameworks       = 'Foundation', 'UIKit'
+s.frameworks       = 'Foundation'
 
 #s.dependency 'SwifterSwift', '~> 4.0'
 
