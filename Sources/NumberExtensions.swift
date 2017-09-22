@@ -14,9 +14,14 @@ import Foundation
 
 public extension Bool {
     
+    @discardableResult
     public mutating func toggle() -> Bool {
         self = !self
         return self
+    }
+    
+    public func toggled() -> Bool {
+        return !self
     }
     
 }
