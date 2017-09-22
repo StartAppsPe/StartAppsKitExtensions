@@ -248,14 +248,14 @@
             }
         }
         
-        public override func updateLayerEffects() {
-            if shadowOpacity != 0 {
-                layer.shadowOffset  = CGSize(width: 0, height: 0);
-                layer.masksToBounds = false
-            } else if cornerRadius != 0 {
-                layer.masksToBounds = true
-            }
-        }
+//        public func updateLayerEffects() {
+//            if shadowOpacity != 0 {
+//                layer.shadowOffset  = CGSize(width: 0, height: 0);
+//                layer.masksToBounds = false
+//            } else if cornerRadius != 0 {
+//                layer.masksToBounds = true
+//            }
+//        }
         
     }
     

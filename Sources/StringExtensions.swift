@@ -70,13 +70,14 @@ public extension String {
         return nil
     }
     
-    //    public func trim() -> String {
-    //        return self.trimmed
-    //    }
-    
     public func trimmed() -> String {
-        return self.trimmed
+        return self.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+
     }
+    
+//    public func trimmed() -> String {
+//        return self.trimmed
+//    }
     
     
     @available(*, deprecated: 2.0, message: "Use cleaned() instead", renamed: "clean(minSize:)")
@@ -242,6 +243,7 @@ public extension String {
     
 }
 
+#if os(iOS)
 
 import UIKit
 
@@ -292,3 +294,4 @@ public extension NSMutableAttributedString {
     
 }
 
+#endif
