@@ -199,20 +199,16 @@
     public extension UIImage {
     
         public func sizeWithLimits(width: CGFloat? = nil, height: CGFloat? = nil) -> CGSize {
-            print("widthA: \(width ?? -1), heightA: \(height ?? -1)")
             let imageSize = size
             if let width = width, height == nil {
                 let ratio = imageSize.width/width
                 let newHeight = imageSize.height/ratio
-                print("widthB: \(width), heightB: \(newHeight)")
                 return CGSize(width: width, height: newHeight)
             } else if let height = height, width == nil {
                 let ratio = imageSize.height/height
                 let newWidth = imageSize.width/ratio
-                print("widthB: \(newWidth), heightB: \(height)")
                 return CGSize(width: height, height: newWidth)
             }
-            print("widthB: \(imageSize.width), heightB: \(imageSize.height)")
             return imageSize
         }
         
