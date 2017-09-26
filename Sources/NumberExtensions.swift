@@ -8,6 +8,12 @@
 
 import Foundation
 
+public func clamped<T>(_ value: T, _ range: ClosedRange<T>) -> T {
+    return range.lowerBound > value ? range.lowerBound
+        : range.upperBound < value ? range.upperBound
+        : value
+}
+
 /********************************************************************************************************/
 // MARK: Bool Extensions
 /********************************************************************************************************/

@@ -10,6 +10,21 @@
     
     import UIKit
     
+    public extension UIAlertController {
+        
+        public convenience init(title: String?, message: String?, preferredStyle: UIAlertControllerStyle = .alert, cancelButtonTitle: String? = "OK") {
+            self.init(title: title, message: message, preferredStyle: preferredStyle)
+            self.addAction(UIAlertAction(title: cancelButtonTitle, style: .cancel, handler: nil))
+        }
+        
+        @discardableResult
+        public func show(from fromVC: UIViewController) -> UIAlertController {
+            fromVC.present(self, animated: true, completion: nil)
+            return self
+        }
+        
+    }
+    
     public extension UIActivityIndicatorView {
         
         public var active: Bool {
@@ -74,6 +89,21 @@
             footerViewFrame.size.height = height
             footerView.frame = footerViewFrame
             self.tableFooterView = footerView
+        }
+        
+    }
+    
+    public extension UITableViewCell {
+        
+        public func autoLayoutHeight(_ tableView: UITableView? = nil) -> CGFloat {
+            if let tableView = tableView { // where frame.size.width == 0 {
+                frame = CGRect(x: 0, y: 0, width: tableView.frame.size.width-13, height: 9999)
+                contentView.frame = frame
+            }
+            layoutIfNeeded()
+            let targetSize = CGSize(width: tableView!.frame.size.width-13, height: 10)
+            let size = contentView.systemLayoutSizeFitting(targetSize, withHorizontalFittingPriority: UILayoutPriority.required, verticalFittingPriority: UILayoutPriority(rawValue: 999))
+            return size.height+1
         }
         
     }
