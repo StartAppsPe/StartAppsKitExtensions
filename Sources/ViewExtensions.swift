@@ -77,7 +77,7 @@
         }
         
     }
-
+    
     
     public extension UIView {
         
@@ -115,7 +115,6 @@
             }
         }
         
-        
         @IBInspectable public var shadowColor: UIColor? {
             get {
                 guard let cgShadowColor = layer.shadowColor else { return nil }
@@ -123,6 +122,16 @@
             }
             set {
                 layer.shadowColor = newValue?.cgColor
+                updateLayerEffects()
+            }
+        }
+        
+        @IBInspectable public var shadowOffset: CGSize {
+            get {
+                return layer.shadowOffset
+            }
+            set {
+                layer.shadowOffset = newValue
                 updateLayerEffects()
             }
         }
@@ -160,7 +169,6 @@
         
         public func updateLayerEffects() {
             if shadowOpacity != 0 {
-                layer.shadowOffset  = CGSize(width: 0, height: 0);
                 layer.masksToBounds = false
             } else if cornerRadius != 0 {
                 layer.masksToBounds = true
@@ -170,7 +178,7 @@
     }
     
     public extension UIButton {
-    
+        
         @IBInspectable public override var cornerRadius: CGFloat {
             get {
                 return layer.cornerRadius
@@ -248,14 +256,14 @@
             }
         }
         
-//        public func updateLayerEffects() {
-//            if shadowOpacity != 0 {
-//                layer.shadowOffset  = CGSize(width: 0, height: 0);
-//                layer.masksToBounds = false
-//            } else if cornerRadius != 0 {
-//                layer.masksToBounds = true
-//            }
-//        }
+        //        public func updateLayerEffects() {
+        //            if shadowOpacity != 0 {
+        //                layer.shadowOffset  = CGSize(width: 0, height: 0);
+        //                layer.masksToBounds = false
+        //            } else if cornerRadius != 0 {
+        //                layer.masksToBounds = true
+        //            }
+        //        }
         
     }
     
@@ -374,3 +382,4 @@
     }
     
 #endif
+

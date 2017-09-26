@@ -48,11 +48,10 @@ public extension Collection where Index == Int  {
 public extension MutableCollection where Index == Int  {
     
     public mutating func shuffle() {
-        if count < 2 { return }
-        for i in 0..<Int(Int64(count))-1 {
-            let j = Random.new(max: Int(Int64(count)) - i) + i
-            guard i != j else { continue }
-            self.swapAt(i, j)
+        guard count > 1 else { return }
+        for index in startIndex..<endIndex - 1 {
+            let randomIndex = Int(arc4random_uniform(UInt32(endIndex - index))) + index
+            if index != randomIndex { self.swapAt(index, randomIndex) }
         }
     }
     
