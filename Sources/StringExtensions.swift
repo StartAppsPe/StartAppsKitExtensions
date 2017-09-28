@@ -10,6 +10,10 @@ import Foundation
 
 public extension String {
     
+    public var localized: String {
+        return NSLocalizedString(self, comment: "")
+    }
+    
     public var length: Int {
         return self.characters.count
     }

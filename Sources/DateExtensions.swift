@@ -36,7 +36,7 @@ public extension Date {
 
 public enum DateParsingError: LocalizedError {
     case failedToParseString
-    public var localizedDescription: String {
+    public var errorDescription: String {
         switch self {
         case .failedToParseString: return "Failed to parse date string"
         }
