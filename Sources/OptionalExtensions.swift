@@ -30,7 +30,7 @@ public extension Optional {
     
 }
 
-public postfix operator †
+postfix operator †
 public postfix func †<T>(_ a: T?) throws -> T {
     return try a.tryUnwrap()
 }
