@@ -11,7 +11,7 @@
     
     import UIKit
     
-    private var _AlertWindowAssociationKey: UInt8 = 0
+    private let _AlertWindowAssociationKey: UInt8 = 0
     
     extension UIAlertController {
         

@@ -7,9 +7,9 @@
 
 import Foundation
 
-enum OptionalError: LocalizedError {
+public enum OptionalError: LocalizedError {
     case unwrappingNone(String?)
-    var errorDescription: String? {
+    public var errorDescription: String? {
         switch self {
         case .unwrappingNone(let errorMessage):
             return errorMessage ?? "Optional value does not exist".localized
@@ -17,9 +17,9 @@ enum OptionalError: LocalizedError {
     }
 }
 
-extension Optional {
+public extension Optional {
     
-    func tryUnwrap(errorMessage: String? = nil) throws -> Wrapped {
+    public func tryUnwrap(errorMessage: String? = nil) throws -> Wrapped {
         switch self {
         case .some(let value):
             return value
@@ -30,7 +30,7 @@ extension Optional {
     
 }
 
-postfix operator †
+public postfix operator †
 public postfix func †<T>(_ a: T?) throws -> T {
     return try a.tryUnwrap()
 }
