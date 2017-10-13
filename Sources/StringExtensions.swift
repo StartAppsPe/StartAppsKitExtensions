@@ -15,17 +15,17 @@ public extension String {
     }
     
     public var length: Int {
-        return self.characters.count
+        return self.count
     }
     
     public func substring(range: Range<Int>) -> String {
-        let startIndex = self.characters.index(self.startIndex, offsetBy: range.lowerBound)
-        let endIndex = self.characters.index(startIndex, offsetBy: range.upperBound - range.lowerBound)
+        let startIndex = self.index(self.startIndex, offsetBy: range.lowerBound)
+        let endIndex = self.index(startIndex, offsetBy: range.upperBound - range.lowerBound)
         return String(self[startIndex..<endIndex])
     }
     
     public func substring(start: Int) -> String {
-        return substring(start: start, end: self.length)
+        return substring(start: start, end: self.count)
     }
     
     public func substring(end: Int) -> String {
@@ -87,12 +87,12 @@ public extension String {
     @available(*, deprecated: 2.0, message: "Use cleaned() instead", renamed: "clean(minSize:)")
     public func clean(minSize: Int = 1) -> String? {
         let trimmedSelf = trimmed()
-        return (trimmedSelf.length >= minSize ? trimmedSelf : nil)
+        return (trimmedSelf.count >= minSize ? trimmedSelf : nil)
     }
     
     public func cleaned(minSize: Int = 1) -> String? {
         let trimmedSelf = trimmed()
-        return (trimmedSelf.length >= minSize ? trimmedSelf : nil)
+        return (trimmedSelf.count >= minSize ? trimmedSelf : nil)
     }
     
     public mutating func capitalizeFirst() {
@@ -100,12 +100,12 @@ public extension String {
     }
     
     public mutating func uppercaseFirst() {
-        guard length > 0 else { return }
+        guard self.count > 0 else { return }
         self.replaceSubrange(startIndex...startIndex, with: String(self[startIndex]).uppercased())
     }
     
     public mutating func lowercaseFirst() {
-        guard length > 0 else { return }
+        guard self.count > 0 else { return }
         self.replaceSubrange(startIndex...startIndex, with: String(self[startIndex]).lowercased())
     }
     
@@ -114,14 +114,14 @@ public extension String {
     }
     
     public func uppercasedFirst() -> String {
-        guard length > 0 else { return self }
+        guard self.count > 0 else { return self }
         let first = self.substring(end: 1)
         let rest = self.substring(start: 1)
         return first.uppercased()+rest
     }
     
     public func lowercasedFirst() -> String {
-        guard length > 0 else { return self }
+        guard self.count > 0 else { return self }
         let first = self.substring(end: 1)
         let rest = self.substring(start: 1)
         return first.lowercased()+rest
@@ -130,17 +130,17 @@ public extension String {
     public func indexOf(_ target: String) -> Int? {
         let range = self.range(of: target)
         if let range = range {
-            return self.characters.distance(from: self.startIndex, to: range.lowerBound)
+            return self.distance(from: self.startIndex, to: range.lowerBound)
         } else {
             return nil
         }
     }
     
     public func indexOf(_ target: String, startIndex: Int) -> Int? {
-        let startRange = self.characters.index(self.startIndex, offsetBy: startIndex)
+        let startRange = self.index(self.startIndex, offsetBy: startIndex)
         let range = self.range(of: target, options: NSString.CompareOptions.literal, range: Range<String.Index>(startRange..<self.endIndex))
         if let range = range {
-            return self.characters.distance(from: self.startIndex, to: range.lowerBound)
+            return self.distance(from: self.startIndex, to: range.lowerBound)
         } else {
             return nil
         }
@@ -151,8 +151,8 @@ public extension String {
         var stepIndex = self.indexOf(target) ?? -1
         while stepIndex > -1 {
             index = stepIndex
-            if stepIndex + target.length < self.length {
-                stepIndex = indexOf(target, startIndex: stepIndex + target.length) ?? -1
+            if stepIndex + target.count < self.count {
+                stepIndex = indexOf(target, startIndex: stepIndex + target.count) ?? -1
             } else {
                 stepIndex = -1
             }
@@ -161,7 +161,7 @@ public extension String {
     }
     
     public func addPaddingAfter(_ length: Int) -> String {
-        let paddingCount = max(length-self.characters.count, 0)
+        let paddingCount = max(length-self.count, 0)
         let paddingString = String(repeating: " ", count: paddingCount)
         return self+paddingString
     }
