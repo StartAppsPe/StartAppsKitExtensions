@@ -13,9 +13,9 @@
     
     private var _AlertWindowAssociationKey: UInt8 = 0
     
-    public extension UIAlertController {
+    extension UIAlertController {
         
-        var alertWindow: UIWindow? {
+        private var alertWindow: UIWindow? {
             get {
                 return objc_getAssociatedObject(self, &_AlertWindowAssociationKey) as? UIWindow
             }
