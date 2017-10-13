@@ -10,21 +10,6 @@
     
     import UIKit
     
-    public extension UIAlertController {
-        
-        public convenience init(title: String?, message: String?, preferredStyle: UIAlertControllerStyle = .alert, cancelButtonTitle: String? = "OK") {
-            self.init(title: title, message: message, preferredStyle: preferredStyle)
-            self.addAction(UIAlertAction(title: cancelButtonTitle, style: .cancel, handler: nil))
-        }
-        
-        @discardableResult
-        public func show(from fromVC: UIViewController) -> UIAlertController {
-            fromVC.present(self, animated: true, completion: nil)
-            return self
-        }
-        
-    }
-    
     public extension UIActivityIndicatorView {
         
         public var active: Bool {

@@ -77,8 +77,8 @@ public extension UIColor {
     
     public convenience init(hex: String) {
         var cString: String = hex.trimmed().uppercased()
-        if (cString.hasPrefix("#")) { cString = String(cString.suffix(from: cString.characters.index(cString.startIndex, offsetBy: 1))) }
-        if (cString.characters.count != 6) {
+        if (cString.hasPrefix("#")) { cString = String(cString.suffix(from: cString.index(cString.startIndex, offsetBy: 1))) }
+        if (cString.count != 6) {
             self.init(red: 0.5, green: 0.0, blue: 0.5, alpha: 1.0)
         } else {
             var rgbValue:UInt32 = 0

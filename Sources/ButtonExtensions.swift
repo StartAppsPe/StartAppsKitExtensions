@@ -19,7 +19,7 @@
     private var _bcak: UInt8 = 4
     private var _tfak: UInt8 = 5
     
-    public extension UIButton {
+    extension UIButton {
         
         public var image: UIImage? {
             get { return self.image(for: UIControlState()) }
