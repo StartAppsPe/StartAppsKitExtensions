@@ -10,90 +10,6 @@
     
     import UIKit
     
-    public extension UIActivityIndicatorView {
-        
-        public var active: Bool {
-            get {
-                return isAnimating
-            }
-            set {
-                if newValue {
-                    startAnimating()
-                } else {
-                    stopAnimating()
-                }
-            }
-        }
-        
-    }
-    
-    public extension UIRefreshControl {
-        
-        public var active: Bool {
-            get {
-                return isRefreshing
-            }
-            set {
-                if newValue {
-                    beginRefreshing()
-                } else {
-                    endRefreshing()
-                }
-            }
-        }
-        
-    }
-    
-    public extension UITableView {
-        
-        public func updateHeaderViewFrame() {
-            guard let headerView = self.tableHeaderView else { return }
-            headerView.setNeedsLayout()
-            headerView.layoutIfNeeded()
-            
-            let fitSize = CGSize(width: self.frame.size.width, height: 3000)
-            let height = headerView.systemLayoutSizeFitting(fitSize,
-                                                            withHorizontalFittingPriority: .required,
-                                                            verticalFittingPriority: .defaultLow).height
-            var headerViewFrame = headerView.frame
-            headerViewFrame.size.height = height
-            headerView.frame = headerViewFrame
-            self.tableHeaderView = headerView
-        }
-        
-        public func updateFooterViewFrame() {
-            guard let footerView = self.tableFooterView else { return }
-            footerView.setNeedsLayout()
-            footerView.layoutIfNeeded()
-            
-            let fitSize = CGSize(width: self.frame.size.width, height: 3000)
-            let height = footerView.systemLayoutSizeFitting(fitSize,
-                                                            withHorizontalFittingPriority: .required,
-                                                            verticalFittingPriority: .defaultLow).height
-            var footerViewFrame = footerView.frame
-            footerViewFrame.size.height = height
-            footerView.frame = footerViewFrame
-            self.tableFooterView = footerView
-        }
-        
-    }
-    
-    public extension UITableViewCell {
-        
-        public func autoLayoutHeight(_ tableView: UITableView? = nil) -> CGFloat {
-            if let tableView = tableView { // where frame.size.width == 0 {
-                frame = CGRect(x: 0, y: 0, width: tableView.frame.size.width-13, height: 9999)
-                contentView.frame = frame
-            }
-            layoutIfNeeded()
-            let targetSize = CGSize(width: tableView!.frame.size.width-13, height: 10)
-            let size = contentView.systemLayoutSizeFitting(targetSize, withHorizontalFittingPriority: UILayoutPriority.required, verticalFittingPriority: UILayoutPriority(rawValue: 999))
-            return size.height+1
-        }
-        
-    }
-    
-    
     public extension UIView {
         
         @IBInspectable public var cornerRadius: CGFloat {
@@ -285,7 +201,7 @@
     public extension UIView {
         
         @discardableResult
-        func addParallax(amount: Int) -> UIMotionEffect {
+        public func addParallax(amount: Int) -> UIMotionEffect {
             let verticalMotionEffect = UIInterpolatingMotionEffect(keyPath: "center.y",
                                                                    type: .tiltAlongVerticalAxis)
             verticalMotionEffect.minimumRelativeValue = -amount
@@ -307,7 +223,7 @@
         }
         
         @discardableResult
-        func addParallax(keyPath: String, type: UIInterpolatingMotionEffectType, amount: Int) -> UIInterpolatingMotionEffect {
+        public func addParallax(keyPath: String, type: UIInterpolatingMotionEffectType, amount: Int) -> UIInterpolatingMotionEffect {
             let motionEffect = UIInterpolatingMotionEffect(keyPath: keyPath, type: type)
             motionEffect.minimumRelativeValue = -amount
             motionEffect.maximumRelativeValue = amount
@@ -382,16 +298,38 @@
         
     }
     
-    public extension UITableView {
+    private var _viewBlurView: UInt8 = 212
+    
+    extension UIView {
         
-        func hideBottomSeparators(showLast: Bool = false) {
-            let inset = separatorInset.left
-            tableFooterView = UIView(frame: CGRect(x: inset, y: 0, width: frame.size.width-inset, height: 0.5))
-            tableFooterView!.backgroundColor = showLast ? separatorColor : UIColor.clear
+        public private(set) var blurView: UIVisualEffectView? {
+            get { return objc_getAssociatedObject(self, &_viewBlurView) as? UIVisualEffectView }
+            set { objc_setAssociatedObject(self, &_viewBlurView, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC) }
         }
         
-        func showBottomSeparators() {
-            tableFooterView = nil
+        public func addBlur(style: UIBlurEffectStyle = .light, animated: Bool) {
+            guard blurView == nil else { return }
+            guard !UIAccessibilityIsReduceTransparencyEnabled() else { return }
+            blurView = UIVisualEffectView(effect: UIBlurEffect(style: style))
+            fillWithSubview(blurView!)
+            if animated {
+                blurView?.alpha = 0.0
+                UIView.animate(withDuration: 0.4, animations: {
+                    self.blurView?.alpha = 1.0
+                })
+            }
+        }
+        
+        public func removeBlur(animated: Bool) {
+            guard blurView != nil else { return }
+            if animated {
+                UIView.animate(withDuration: 0.4, animations: {
+                    self.blurView?.alpha = 0.0
+                }, completion: { _ in
+                    self.blurView?.removeFromSuperview()
+                    self.blurView = nil
+                })
+            }
         }
         
     }

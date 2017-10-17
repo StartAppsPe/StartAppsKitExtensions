@@ -247,6 +247,40 @@ public extension String {
     
 }
 
+// Mark: Insensitive operators
+
+extension String {
+    
+    public var insensitive: String {
+        return self.folding(options: [.caseInsensitive, .diacriticInsensitive, .widthInsensitive], locale: nil)
+    }
+    
+}
+
+public func ~= (lhs: String, rhs: String) -> Bool {
+    return lhs.insensitive == rhs.insensitive
+}
+
+infix operator ~<
+public func ~< (lhs: String, rhs: String) -> Bool {
+    return lhs.insensitive < rhs.insensitive
+}
+
+infix operator ~<=
+public func ~<= (lhs: String, rhs: String) -> Bool {
+    return lhs.insensitive <= rhs.insensitive
+}
+
+infix operator ~>
+public func ~> (lhs: String, rhs: String) -> Bool {
+    return lhs.insensitive > rhs.insensitive
+}
+
+infix operator ~>=
+public func ~>= (lhs: String, rhs: String) -> Bool {
+    return lhs.insensitive >= rhs.insensitive
+}
+
 #if os(iOS)
 
 import UIKit
