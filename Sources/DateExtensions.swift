@@ -38,7 +38,7 @@ public enum DateParsingError: LocalizedError {
     case failedToParseString
     public var errorDescription: String {
         switch self {
-        case .failedToParseString: return "Failed to parse date string"
+        case .failedToParseString: return "Failed to parse date string".localized
         }
     }
     
@@ -520,16 +520,28 @@ public enum DayOfWeek: Int, Equatable {
         default:          return nil
         }
     }
-
+    
     public var name: String {
         switch self {
-        case .monday:    return "Lunes"
-        case .tuesday:   return "Martes"
-        case .wednesday: return "Miércoles"
-        case .thursday:  return "Jueves"
-        case .friday:    return "Viernes"
-        case .saturday:  return "Sábado"
-        case .sunday:    return "Domingo"
+        case .monday:    return "Lunes".localized
+        case .tuesday:   return "Martes".localized
+        case .wednesday: return "Miércoles".localized
+        case .thursday:  return "Jueves".localized
+        case .friday:    return "Viernes".localized
+        case .saturday:  return "Sábado".localized
+        case .sunday:    return "Domingo".localized
+        }
+    }
+    
+    public var shortName: String {
+        switch self {
+        case .monday:    return "LUN".localized
+        case .tuesday:   return "MAR".localized
+        case .wednesday: return "MIE".localized
+        case .thursday:  return "JUE".localized
+        case .friday:    return "VIE".localized
+        case .saturday:  return "SAB".localized
+        case .sunday:    return "DOM".localized
         }
     }
 
@@ -547,14 +559,14 @@ public enum DayOfWeek: Int, Equatable {
     }
 
 
-    /// Returns wether day of week is in the weekend. Includes friday as weekend.
+    /// Returns wether day of week is in the weekend
     public var isWeekend: Bool {
         switch self {
         case .monday:    return false
         case .tuesday:   return false
         case .wednesday: return false
         case .thursday:  return false
-        case .friday:    return true
+        case .friday:    return false
         case .saturday:  return true
         case .sunday:    return true
         }
