@@ -18,6 +18,7 @@
     private var _etak: UInt8 = 3
     private var _bcak: UInt8 = 4
     private var _tfak: UInt8 = 5
+    private var _fhsk: UInt8 = 6
     
     extension UIButton {
         
@@ -128,7 +129,7 @@
         public func setAction(_ action: ((_ sender: Any) -> Void)?) {
             if let action = action {
                 self.removeTarget(self, action: nil)
-                self.addTarget(self, action: #selector(UIGestureRecognizer.performAction))
+                self.addTarget(self, action: #selector(performAction))
                 self.closuresWrapper = ClosureWrapper(action: action)
             } else {
                 self.removeTarget(self, action: nil)
@@ -149,10 +150,14 @@
     
     public extension UIControl {
         
+        private struct AssociatedKeys {
+            static var targetClosure = "targetClosure"
+        }
+        
         public func setAction(controlEvents: UIControlEvents, action: ((_ sender: Any) -> Void)?) {
             if let action = action {
                 self.removeTarget(self, action: nil, for: controlEvents)
-                self.addTarget(self, action: #selector(UIControl.performAction), for: controlEvents)
+                self.addTarget(self, action: #selector(performAction), for: controlEvents)
                 self.closuresWrapper = ClosureWrapper(action: action)
             } else {
                 self.removeTarget(self, action: nil, for: controlEvents)
@@ -165,8 +170,8 @@
         }
         
         fileprivate var closuresWrapper: ClosureWrapper? {
-            get { return objc_getAssociatedObject(self, &_aaak) as? ClosureWrapper }
-            set { objc_setAssociatedObject(self, &_aaak, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC) }
+            get { return objc_getAssociatedObject(self, &AssociatedKeys.targetClosure) as? ClosureWrapper }
+            set { objc_setAssociatedObject(self, &AssociatedKeys.targetClosure, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC) }
         }
         
     }
@@ -187,7 +192,6 @@
         
     }
     
-    
     public extension UIButton {
         
         public func setAction(_ action: @escaping ((_ sender: Any) -> Void)) {
@@ -199,7 +203,7 @@
     public extension UIBarButtonItem {
         
         public convenience init(barButtonSystemItem systemItem: UIBarButtonSystemItem, action: ((_ sender: Any) -> Void)?) {
-            self.init(barButtonSystemItem: systemItem, target: nil, action: #selector(UIBarButtonItem.performAction))
+            self.init(barButtonSystemItem: systemItem, target: nil, action: #selector(performAction))
             if let action = action {
                 self.closuresWrapper = ClosureWrapper(action: action)
                 self.target = self
@@ -207,7 +211,7 @@
         }
         
         public convenience init(image: UIImage?, style: UIBarButtonItemStyle, action: ((_ sender: Any) -> Void)?) {
-            self.init(image: image, style: style, target: nil, action: #selector(UIBarButtonItem.performAction))
+            self.init(image: image, style: style, target: nil, action: #selector(performAction))
             if let action = action {
                 self.closuresWrapper = ClosureWrapper(action: action)
                 self.target = self
@@ -215,7 +219,7 @@
         }
         
         public convenience init(title: String?, style: UIBarButtonItemStyle, action: ((_ sender: Any) -> Void)?) {
-            self.init(title: title, style: style, target: nil, action: #selector(UIBarButtonItem.performAction))
+            self.init(title: title, style: style, target: nil, action: #selector(performAction))
             if let action = action {
                 self.closuresWrapper = ClosureWrapper(action: action)
                 self.target = self
@@ -234,7 +238,7 @@
     }
     
     private final class ClosureWrapper {
-        fileprivate var action: (_ sender: Any) -> Void
+        fileprivate let action: (_ sender: Any) -> Void
         init(action: @escaping (_ sender: Any) -> Void) {
             self.action = action
         }
