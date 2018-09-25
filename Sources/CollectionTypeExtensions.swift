@@ -25,7 +25,7 @@ public extension Collection {
     
     public func shuffled() -> [Iterator.Element] {
         var list = Array(self)
-        list.shuffle()
+        list.riffle()
         return list
     }
     
@@ -47,7 +47,7 @@ public extension Collection where Index == Int  {
 
 public extension MutableCollection where Index == Int  {
     
-    public mutating func shuffle() {
+    public mutating func riffle() {
         guard count > 1 else { return }
         for index in startIndex..<endIndex - 1 {
             let randomIndex = Int(arc4random_uniform(UInt32(endIndex - index))) + index
