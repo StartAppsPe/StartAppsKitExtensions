@@ -138,7 +138,7 @@ public extension String {
     
     public func indexOf(_ target: String, startIndex: Int) -> Int? {
         let startRange = self.index(self.startIndex, offsetBy: startIndex)
-        let range = self.range(of: target, options: NSString.CompareOptions.literal, range: Range<String.Index>(startRange..<self.endIndex))
+        let range = self.range(of: target, options: NSString.CompareOptions.literal, range: startRange..<self.endIndex)
         if let range = range {
             return self.distance(from: self.startIndex, to: range.lowerBound)
         } else {
