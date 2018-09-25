@@ -20,12 +20,6 @@ public func clamped<T>(_ value: T, _ range: ClosedRange<T>) -> T {
 
 public extension Bool {
     
-    @discardableResult
-    public mutating func toggle() -> Bool {
-        self = !self
-        return self
-    }
-    
     public func toggled() -> Bool {
         return !self
     }
