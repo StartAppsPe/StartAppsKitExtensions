@@ -45,18 +45,6 @@ public extension Collection where Index == Int  {
     
 }
 
-public extension MutableCollection where Index == Int  {
-    
-    public mutating func shuffle() {
-        guard count > 1 else { return }
-        for index in startIndex..<endIndex - 1 {
-            let randomIndex = Int(arc4random_uniform(UInt32(endIndex - index))) + index
-            if index != randomIndex { self.swapAt(index, randomIndex) }
-        }
-    }
-    
-}
-
 public extension Collection where Iterator.Element : Equatable {
     
     public func uniqued() -> [Self.Iterator.Element] {
