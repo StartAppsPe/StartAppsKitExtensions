@@ -24,7 +24,7 @@
             }
         }
         
-        public convenience init(title: String?, message: String?, preferredStyle: UIAlertControllerStyle = .alert, cancelButtonTitle: String? = "OK") {
+        public convenience init(title: String?, message: String?, preferredStyle: UIAlertController.Style = .alert, cancelButtonTitle: String? = "OK") {
             self.init(title: title, message: message, preferredStyle: preferredStyle)
             self.addAction(UIAlertAction(title: cancelButtonTitle, style: .cancel, handler: nil))
         }
@@ -36,7 +36,7 @@
             } else {
                 alertWindow = UIWindow(frame: UIScreen.main.bounds)
                 alertWindow?.rootViewController = UIViewController()
-                alertWindow?.windowLevel = UIWindowLevelAlert + 1
+                alertWindow?.windowLevel = UIWindow.Level.alert + 1
                 alertWindow?.makeKeyAndVisible()
                 alertWindow?.rootViewController?.present(self, animated: animated, completion: completion)
             }
