@@ -6,8 +6,6 @@
 //
 //
 
-//import SwifterSwift
-
 #if os(iOS)
     
     import UIKit
@@ -23,18 +21,18 @@
     extension UIButton {
         
         public var image: UIImage? {
-            get { return self.image(for: UIControlState()) }
-            set { setImage(newValue, for: UIControlState()) }
+            get { return self.image(for: UIControl.State()) }
+            set { setImage(newValue, for: UIControl.State()) }
         }
         
         public var backgroundImage: UIImage? {
-            get { return self.backgroundImage(for: UIControlState()) }
-            set { setBackgroundImage(newValue, for: UIControlState()) }
+            get { return self.backgroundImage(for: UIControl.State()) }
+            set { setBackgroundImage(newValue, for: UIControl.State()) }
         }
         
         public var textColor: UIColor? {
-            get { return titleColor(for: UIControlState()) }
-            set { setTitleColor(newValue, for: UIControlState()) }
+            get { return titleColor(for: UIControl.State()) }
+            set { setTitleColor(newValue, for: UIControl.State()) }
         }
         
         public var titleFont: UIFont? {
@@ -44,24 +42,24 @@
         
         public var title: String? {
             get {
-                return self.title(for: UIControlState())
+                return self.title(for: UIControl.State())
             }
             set {
-                setTitle(newValue, for: UIControlState())
+                setTitle(newValue, for: UIControl.State())
                 titleOriginal = newValue
             }
         }
         
         public var tempTitle: String? {
             get {
-                return (self.title(for: UIControlState()) != titleOriginal ? self.title(for: UIControlState()) : nil)
+                return (self.title(for: UIControl.State()) != titleOriginal ? self.title(for: UIControl.State()) : nil)
             }
             set {
                 if let newValue = newValue {
                     if titleOriginal == nil { titleOriginal = title }
-                    setTitle(newValue, for: UIControlState())
+                    setTitle(newValue, for: UIControl.State())
                 } else {
-                    setTitle(titleOriginal, for: UIControlState())
+                    setTitle(titleOriginal, for: UIControl.State())
                 }
             }
         }
@@ -82,7 +80,7 @@
         }
         
         fileprivate func createActivityIndicatorView() -> UIActivityIndicatorView {
-            let tempView = UIActivityIndicatorView(activityIndicatorStyle: .white)
+            let tempView = UIActivityIndicatorView(style: .white)
             tempView.center    = CGPoint(x: self.bounds.size.width/2, y: self.bounds.size.height/2)
             tempView.tintColor = textColor
             tempView.color     = textColor
@@ -154,7 +152,7 @@
             static var targetClosure = "targetClosure"
         }
         
-        public func setAction(controlEvents: UIControlEvents, action: ((_ sender: Any) -> Void)?) {
+        public func setAction(controlEvents: UIControl.Event, action: ((_ sender: Any) -> Void)?) {
             if let action = action {
                 self.removeTarget(self, action: nil, for: controlEvents)
                 self.addTarget(self, action: #selector(performAction), for: controlEvents)
@@ -202,7 +200,7 @@
     
     public extension UIBarButtonItem {
         
-        public convenience init(barButtonSystemItem systemItem: UIBarButtonSystemItem, action: ((_ sender: Any) -> Void)?) {
+        public convenience init(barButtonSystemItem systemItem: UIBarButtonItem.SystemItem, action: ((_ sender: Any) -> Void)?) {
             self.init(barButtonSystemItem: systemItem, target: nil, action: #selector(performAction))
             if let action = action {
                 self.closuresWrapper = ClosureWrapper(action: action)
@@ -210,7 +208,7 @@
             }
         }
         
-        public convenience init(image: UIImage?, style: UIBarButtonItemStyle, action: ((_ sender: Any) -> Void)?) {
+        public convenience init(image: UIImage?, style: UIBarButtonItem.Style, action: ((_ sender: Any) -> Void)?) {
             self.init(image: image, style: style, target: nil, action: #selector(performAction))
             if let action = action {
                 self.closuresWrapper = ClosureWrapper(action: action)
@@ -218,7 +216,7 @@
             }
         }
         
-        public convenience init(title: String?, style: UIBarButtonItemStyle, action: ((_ sender: Any) -> Void)?) {
+        public convenience init(title: String?, style: UIBarButtonItem.Style, action: ((_ sender: Any) -> Void)?) {
             self.init(title: title, style: style, target: nil, action: #selector(performAction))
             if let action = action {
                 self.closuresWrapper = ClosureWrapper(action: action)

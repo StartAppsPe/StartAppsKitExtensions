@@ -71,7 +71,7 @@
             var effectImage = self
             
             let hasBlur = blurRadius > __FLT_EPSILON__
-            let hasSaturationChange = fabs(saturationDeltaFactor - 1.0) > __FLT_EPSILON__
+            let hasSaturationChange = abs(saturationDeltaFactor - 1.0) > __FLT_EPSILON__
             
             if hasBlur || hasSaturationChange {
                 func createEffectBuffer(_ context: CGContext) -> vImage_Buffer {
@@ -268,10 +268,10 @@
             let imageData: Data
             let mimeType: String
             if hasAlpha {
-                imageData = UIImagePNGRepresentation(self)!
+                imageData = self.pngData()!
                 mimeType = "image/png"
             } else {
-                imageData = UIImageJPEGRepresentation(self, 1.0)!
+                imageData = self.jpegData(compressionQuality: 0.8)!
                 mimeType = "image/jpeg"
             }
             let imageDataString = imageData.base64EncodedString()
@@ -279,7 +279,7 @@
         }
         
         public var jpegDataUri: String {
-            let imageData = UIImageJPEGRepresentation(self, 1.0)!
+            let imageData = self.jpegData(compressionQuality: 0.8)!
             let mimeType = "image/jpeg"
             let imageDataString = imageData.base64EncodedString()
             return "data:\(mimeType);base64,\(imageDataString)"

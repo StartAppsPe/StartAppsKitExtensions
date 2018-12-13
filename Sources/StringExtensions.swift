@@ -294,8 +294,8 @@ public extension String {
         return NSAttributedString(
             string: self,
             attributes: [
-                NSAttributedStringKey.paragraphStyle: paragraphStyle,
-                NSAttributedStringKey.baselineOffset: 0
+                NSAttributedString.Key.paragraphStyle: paragraphStyle,
+                NSAttributedString.Key.baselineOffset: 0
             ]
         )
     }
@@ -316,9 +316,9 @@ public extension String {
 public extension NSAttributedString {
     
     public convenience init(string: String, font: UIFont?, color: UIColor? = nil) {
-        var attributes = [NSAttributedStringKey : Any]()
-        if font  != nil { attributes[NSAttributedStringKey.font] = font! }
-        if color != nil { attributes[NSAttributedStringKey.foregroundColor] = color! }
+        var attributes = [NSAttributedString.Key : Any]()
+        if font  != nil { attributes[NSAttributedString.Key.font] = font! }
+        if color != nil { attributes[NSAttributedString.Key.foregroundColor] = color! }
         self.init(string: string, attributes: attributes)
     }
     

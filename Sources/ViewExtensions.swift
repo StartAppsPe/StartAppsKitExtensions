@@ -223,7 +223,7 @@
         }
         
         @discardableResult
-        public func addParallax(keyPath: String, type: UIInterpolatingMotionEffectType, amount: Int) -> UIInterpolatingMotionEffect {
+        public func addParallax(keyPath: String, type: UIInterpolatingMotionEffect.EffectType, amount: Int) -> UIInterpolatingMotionEffect {
             let motionEffect = UIInterpolatingMotionEffect(keyPath: keyPath, type: type)
             motionEffect.minimumRelativeValue = -amount
             motionEffect.maximumRelativeValue = amount
@@ -283,17 +283,17 @@
     public extension UIViewController {
         
         public func insertChild(viewController: UIViewController, inView: UIView) {
-            addChildViewController(viewController)
-            viewController.willMove(toParentViewController: self)
+            addChild(viewController)
+            viewController.willMove(toParent: self)
             inView.fillWithSubview(viewController.view)
-            viewController.didMove(toParentViewController: self)
+            viewController.didMove(toParent: self)
         }
         
         public func removeChild(viewController: UIViewController) {
-            viewController.removeFromParentViewController()
-            viewController.willMove(toParentViewController: nil)
+            viewController.removeFromParent()
+            viewController.willMove(toParent: nil)
             viewController.view?.removeFromSuperview()
-            viewController.didMove(toParentViewController: nil)
+            viewController.didMove(toParent: nil)
         }
         
     }
@@ -307,9 +307,9 @@
             set { objc_setAssociatedObject(self, &_viewBlurView, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC) }
         }
         
-        public func addBlur(style: UIBlurEffectStyle = .light, animated: Bool) {
+        public func addBlur(style: UIBlurEffect.Style = .light, animated: Bool) {
             guard blurView == nil else { return }
-            guard !UIAccessibilityIsReduceTransparencyEnabled() else { return }
+            guard !UIAccessibility.isReduceTransparencyEnabled else { return }
             blurView = UIVisualEffectView(effect: UIBlurEffect(style: style))
             fillWithSubview(blurView!)
             if animated {
