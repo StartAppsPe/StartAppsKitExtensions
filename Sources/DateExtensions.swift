@@ -169,8 +169,8 @@ public extension Date {
     }
 
     public func tinyTimeAgoString(_ locale: String? = nil) -> String {
-        var timeAgoValue: Int!
-        var timeAgoUnit:  String!
+        let timeAgoValue: Int
+        let timeAgoUnit:  String
         let secondsAgo = TimeInterval(secondsBeforeNow())
         if (secondsAgo < TimeIntervalMinute) { // Smaller than a minute
             timeAgoValue = Int(secondsAgo)
@@ -508,7 +508,6 @@ public enum DayOfWeek: Int, Equatable {
         case "WE":        self = .wednesday
         case "TH":        self = .thursday
         case "FR":        self = .friday
-        case "SA":        self = .saturday
         case "SU":        self = .sunday
         case "MON":       self = .monday
         case "TUE":       self = .tuesday

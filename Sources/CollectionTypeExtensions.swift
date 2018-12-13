@@ -57,7 +57,7 @@ public extension Collection where Iterator.Element : Equatable {
         return distinctElements
     }
     
-    public func uniqued<T: Equatable>(_ by: @autoclosure (_ element: Self.Iterator.Element) -> T) -> [Self.Iterator.Element] {
+    public func uniqued<T: Equatable>(_ by: (_ element: Self.Iterator.Element) -> T) -> [Self.Iterator.Element] {
         var distinctElements: [Self.Iterator.Element] = []
         for element in self {
             if distinctElements.find({ by($0) == by(element) }) == nil {

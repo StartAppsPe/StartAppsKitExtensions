@@ -106,7 +106,6 @@
             case "iPad6,7":   return "iPad Pro (12.9 inch)"
             case "iPad6,8":   return "iPad Pro (12.9 inch)"
             case "iPad6,3":   return "iPad Pro (9.7 inch)"
-            case "iPad6,3":   return "iPad Pro (9.7 inch)"
             case "Watch1,1":   return "Apple Watch"
             case "Watch1,2":   return "Apple Watch"
             case "Watch2,6":   return "Apple Watch Series 1"
