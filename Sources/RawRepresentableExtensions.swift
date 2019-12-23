@@ -10,7 +10,7 @@ public enum RawRepresentableInitError: Error {
     case invalidValue(Any)
 }
 
-public extension RawRepresentable {
+extension RawRepresentable {
     
     public init(rawValue: RawValue) throws {
         guard let value = Self(rawValue: rawValue) else {

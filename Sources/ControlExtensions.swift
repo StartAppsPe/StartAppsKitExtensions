@@ -9,7 +9,7 @@
     
     import UIKit
     
-    public extension UIActivityIndicatorView {
+    extension UIActivityIndicatorView {
         
         public var active: Bool {
             get {
@@ -26,7 +26,7 @@
         
     }
     
-    public extension UIRefreshControl {
+    extension UIRefreshControl {
         
         public var active: Bool {
             get {

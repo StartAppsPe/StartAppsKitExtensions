@@ -8,7 +8,7 @@
 
 import Foundation
 
-public extension String {
+extension String {
     
     public var localized: String {
         return NSLocalizedString(self, comment: "")
@@ -77,17 +77,6 @@ public extension String {
     public func trimmed() -> String {
         return self.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
 
-    }
-    
-//    public func trimmed() -> String {
-//        return self.trimmed
-//    }
-    
-    
-    @available(*, deprecated: 2.0, message: "Use cleaned() instead", renamed: "clean(minSize:)")
-    public func clean(minSize: Int = 1) -> String? {
-        let trimmedSelf = trimmed()
-        return (trimmedSelf.count >= minSize ? trimmedSelf : nil)
     }
     
     public func cleaned(minSize: Int = 1) -> String? {
@@ -168,7 +157,7 @@ public extension String {
     
 }
 
-public extension String {
+extension String {
     
     public func urlEncode() -> String {
         return addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)!
@@ -217,7 +206,7 @@ public enum StringParsingError: Error {
     case failedToProcessBytes, failedToProcessData, failedToConvertToData
 }
 
-public extension String {
+extension String {
     
     public init(bytes: [UInt8]) throws {
         guard let parsedString = String(bytes: bytes, encoding: .utf8) else {
@@ -285,7 +274,7 @@ public func ~>= (lhs: String, rhs: String) -> Bool {
 
 import UIKit
 
-public extension String {
+extension String {
     
     public func justifiedAttributed() -> NSAttributedString {
         let paragraphStyle = NSMutableParagraphStyle()
@@ -313,7 +302,7 @@ public extension String {
     
 }
 
-public extension NSAttributedString {
+extension NSAttributedString {
     
     public convenience init(string: String, font: UIFont?, color: UIColor? = nil) {
         var attributes = [NSAttributedString.Key : Any]()
@@ -324,7 +313,7 @@ public extension NSAttributedString {
     
 }
 
-public extension NSMutableAttributedString {
+extension NSMutableAttributedString {
     
     public func append(string: String, font: UIFont? = nil, color: UIColor? = nil) {
         self.append(NSAttributedString(string: string, font: font, color: color))

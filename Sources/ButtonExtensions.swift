@@ -117,7 +117,7 @@
         
     }
     
-    public extension UIGestureRecognizer {
+    extension UIGestureRecognizer {
         
         public convenience init(action: ((_ sender: Any) -> Void)?) {
             self.init()
@@ -146,7 +146,7 @@
         
     }
     
-    public extension UIControl {
+    extension UIControl {
         
         private struct AssociatedKeys {
             static var targetClosure = "targetClosure"
@@ -174,7 +174,7 @@
         
     }
     
-    public extension UIRefreshControl {
+    extension UIRefreshControl {
         
         public convenience init(color: UIColor? = nil, action: ((_ sender: Any) -> Void)?) {
             self.init()
@@ -190,7 +190,7 @@
         
     }
     
-    public extension UIButton {
+    extension UIButton {
         
         public func setAction(_ action: @escaping ((_ sender: Any) -> Void)) {
             setAction(controlEvents: .touchUpInside, action: action)
@@ -198,7 +198,7 @@
         
     }
     
-    public extension UIBarButtonItem {
+    extension UIBarButtonItem {
         
         public convenience init(barButtonSystemItem systemItem: UIBarButtonItem.SystemItem, action: ((_ sender: Any) -> Void)?) {
             self.init(barButtonSystemItem: systemItem, target: nil, action: #selector(performAction))
@@ -253,7 +253,7 @@
         }
     }
     
-    public extension UITextField {
+    extension UITextField {
         
         public func setAction(returnKeyType: UIReturnKeyType?, action: ((_ sender: Any) -> Void)?) {
             if let returnKeyType = returnKeyType {

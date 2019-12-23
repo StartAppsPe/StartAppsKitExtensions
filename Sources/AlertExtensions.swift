@@ -36,7 +36,7 @@
             } else {
                 alertWindow = UIWindow(frame: UIScreen.main.bounds)
                 alertWindow?.rootViewController = UIViewController()
-                alertWindow?.windowLevel = UIWindow.Level.alert + 1
+                alertWindow?.windowLevel = 11111 + 1 // TODO: UIWindow.Level.alert
                 alertWindow?.makeKeyAndVisible()
                 alertWindow?.rootViewController?.present(self, animated: animated, completion: completion)
             }

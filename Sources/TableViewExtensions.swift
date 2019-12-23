@@ -9,7 +9,7 @@
     
     import UIKit
     
-    public extension UITableView {
+    extension UITableView {
         
         public func updateHeaderViewFrame() {
             guard let headerView = self.tableHeaderView else { return }
@@ -43,7 +43,7 @@
         
     }
     
-    public extension UITableViewCell {
+    extension UITableViewCell {
         
         public func autoLayoutHeight(_ tableView: UITableView? = nil) -> CGFloat {
             if let tableView = tableView { // where frame.size.width == 0 {
@@ -58,7 +58,7 @@
         
     }
     
-    public extension UITableView {
+    extension UITableView {
         
         public func hideBottomSeparator(showLast: Bool = false) {
             let inset = separatorInset.left
@@ -72,7 +72,7 @@
         
     }
     
-    public extension UITableView {
+    extension UITableView {
         
         public func scrollToTop(animated: Bool) {
             self.scrollRectToVisible(CGRect(x: 0, y: 0, width: 1, height: 1), animated: animated)

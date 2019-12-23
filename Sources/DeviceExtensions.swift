@@ -10,7 +10,7 @@
     
     import UIKit
     
-    public extension UIApplication {
+    extension UIApplication {
         
         public var currentViewController: UIViewController? {
             var isFinal = false
@@ -35,7 +35,7 @@
         
     }
     
-    public extension UIDevice {
+    extension UIDevice {
         
         public var isSimulator: Bool {
             return self.platformString.contains("Simulator")

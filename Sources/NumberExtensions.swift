@@ -18,7 +18,7 @@ public func clamped<T>(_ value: T, _ range: ClosedRange<T>) -> T {
 // MARK: Bool Extensions
 /********************************************************************************************************/
 
-public extension Bool {
+extension Bool {
     
     public func toggled() -> Bool {
         return !self
@@ -30,7 +30,7 @@ public extension Bool {
  // MARK: Int Extensions
  /********************************************************************************************************/
 
-public extension Int {
+extension Int {
     
     public init?(string: String) {
         let nan = NSDecimalNumber.notANumber
@@ -49,7 +49,7 @@ public extension Int {
 // MARK: NSDecimalNumber Extensions
 /********************************************************************************************************/
 
-public extension NSDecimalNumber {
+extension NSDecimalNumber {
     
     public convenience init?(fromString: String) {
         let nan = NSDecimalNumber.notANumber

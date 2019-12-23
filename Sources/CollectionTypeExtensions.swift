@@ -8,7 +8,7 @@
 
 import Foundation
 
-public extension Collection {
+extension Collection {
     
     public func performEach(_ action: (Self.Iterator.Element) -> Void) {
         for element in self { action(element) }
@@ -16,7 +16,7 @@ public extension Collection {
     
     
     public func find(_ isElement: (Self.Iterator.Element) -> Bool) -> Self.Iterator.Element? {
-        if let index = index(where: isElement) {
+        if let index = firstIndex(where: isElement) {
             return self[index]
         }
         return nil
@@ -31,7 +31,7 @@ public extension Collection {
     
 }
 
-public extension Collection where Index == Int  {
+extension Collection where Index == Int  {
     
     public var randomElement: Self.Iterator.Element? {
         return self[Random.new(max: Int(Int64(count))-1)]
@@ -45,7 +45,7 @@ public extension Collection where Index == Int  {
     
 }
 
-public extension Collection where Iterator.Element : Equatable {
+extension Collection where Iterator.Element : Equatable {
     
     public func uniqued() -> [Self.Iterator.Element] {
         var distinctElements: [Self.Iterator.Element] = []
@@ -69,7 +69,7 @@ public extension Collection where Iterator.Element : Equatable {
     
 }
 
-public extension Set {
+extension Set {
     
     public mutating func toggle(_ element: Element) -> Bool {
         if contains(element) {
@@ -84,7 +84,7 @@ public extension Set {
 }
 
 
-public extension Array {
+extension Array {
     
     public mutating func popFirst() -> Element? {
         if let first = first {
@@ -96,7 +96,7 @@ public extension Array {
     
 }
 
-public extension RangeReplaceableCollection where Iterator.Element: Equatable {
+extension RangeReplaceableCollection where Iterator.Element: Equatable {
     
     public mutating func appendUnique(_ element: Self.Iterator.Element) {
         if !contains(element) {
@@ -118,7 +118,7 @@ public extension RangeReplaceableCollection where Iterator.Element: Equatable {
     
     @discardableResult
     public mutating func remove(_ element: Self.Iterator.Element) -> Bool {
-        if let index = index(of: element) {
+        if let index = firstIndex(of: element) {
             self.remove(at: index)
             return true
         }
@@ -127,7 +127,7 @@ public extension RangeReplaceableCollection where Iterator.Element: Equatable {
     
     @discardableResult
     public mutating func toggle(_ element: Self.Iterator.Element) -> Bool {
-        if let index = index(of: element) {
+        if let index = firstIndex(of: element) {
             self.remove(at: index)
             return false
         } else {
@@ -138,7 +138,7 @@ public extension RangeReplaceableCollection where Iterator.Element: Equatable {
     
 }
 
-//public extension Range where  Iterator.Element : Comparable {
+//extension Range where  Iterator.Element : Comparable {
 //    
 //    public func contains(element: Element) -> Bool {
 //        return self ~= element

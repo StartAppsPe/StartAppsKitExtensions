@@ -11,7 +11,7 @@ import Foundation
     import UIKit
 #endif
 
-public extension URLRequest {
+extension URLRequest {
     
     public mutating func setHttpBody(_ body: Data) throws {
         let data = body

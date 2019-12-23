@@ -8,7 +8,7 @@
 
 import Foundation
 
-public extension Timer {
+extension Timer {
     
     /********************************************************************************************************/
     // MARK: Closure Methods

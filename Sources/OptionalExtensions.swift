@@ -17,7 +17,7 @@ public enum OptionalError: LocalizedError {
     }
 }
 
-public extension Optional {
+extension Optional {
     
     public func tryUnwrap(errorMessage: String? = nil) throws -> Wrapped {
         switch self {

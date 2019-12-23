@@ -10,7 +10,7 @@
     
     import UIKit
     
-    public extension UIView {
+    extension UIView {
         
         @IBInspectable public var cornerRadius: CGFloat {
             get {
@@ -108,7 +108,7 @@
         
     }
     
-    public extension UIButton {
+    extension UIButton {
         
         @IBInspectable public override var cornerRadius: CGFloat {
             get {
@@ -198,7 +198,7 @@
         
     }
     
-    public extension UIView {
+    extension UIView {
         
         @discardableResult
         public func addParallax(amount: Int) -> UIMotionEffect {
@@ -233,7 +233,7 @@
         
     }
     
-    public extension UIView {
+    extension UIView {
         
         public func fillWithSubview(_ view: UIView, margin: CGFloat = 0.0) {
             
@@ -280,7 +280,7 @@
         
     }
     
-    public extension UIViewController {
+    extension UIViewController {
         
         public func insertChild(viewController: UIViewController, inView: UIView) {
             addChild(viewController)

@@ -21,7 +21,7 @@ let CalendarComponents: Set<Calendar.Component> = [
 ]
 
 private var _forcedNowDate: Date?
-public extension Date {
+extension Date {
     
     public static var forcedNow: Date? {
         set { _forcedNowDate = newValue }
@@ -44,7 +44,7 @@ public enum DateParsingError: LocalizedError {
     
 }
 
-public extension Date {
+extension Date {
     
     private static var _isoDateFormatter: DateFormatter?
     
@@ -78,7 +78,7 @@ public extension Date {
     
 }
 
-public extension Date {
+extension Date {
 
 
     /********************************************************************************************************/

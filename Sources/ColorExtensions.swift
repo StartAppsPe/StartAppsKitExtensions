@@ -14,7 +14,7 @@
 
 import UIKit
 
-public extension UIColor {
+extension UIColor {
     
     public func with(hue newHue: CGFloat) -> UIColor {
         var saturation: CGFloat = 1.0, brightness: CGFloat = 1.0, alpha: CGFloat = 1.0
@@ -102,7 +102,7 @@ public extension UIColor {
     
 }
 
-public extension UIColor {
+extension UIColor {
     
     public convenience init(r: Int, g:Int, b:Int, a: Int = 255) {
         self.init(red: CGFloat(r)/255, green: CGFloat(g)/255, blue: CGFloat(b)/255, alpha: CGFloat(a)/255)

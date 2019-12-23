@@ -12,7 +12,7 @@
     import UIKit
     import Accelerate
     
-    public extension UIImage {
+    extension UIImage {
         
         public func applyLightEffect() -> UIImage? {
             return applyBlurWithRadius(30, tintColor: UIColor(white: 1.0, alpha: 0.3), saturationDeltaFactor: 1.8)
@@ -196,7 +196,7 @@
         case stretch, minSize, maxSize, aspectFill
     }
     
-    public extension UIImage {
+    extension UIImage {
     
         public func sizeWithLimits(width: CGFloat? = nil, height: CGFloat? = nil) -> CGSize {
             let imageSize = size
@@ -254,7 +254,7 @@
         
     }
     
-    public extension UIImage {
+    extension UIImage {
         
         public var hasAlpha: Bool {
             let alpha = cgImage!.alphaInfo
@@ -286,7 +286,7 @@
         }
     }
     
-    public extension UIView {
+    extension UIView {
         
         public func contentsAsImage() -> UIImage {
             UIGraphicsBeginImageContextWithOptions(frame.size, true, UIScreen.main.scale)
