@@ -32,7 +32,9 @@
         @discardableResult
         public func show(from fromVC: UIViewController? = nil, _ animated: Bool = true, completion: (() -> Void)? = nil) -> UIAlertController {
             if let fromVC = fromVC {
-                fromVC.present(self, animated: animated, completion: completion)
+                DispatchQueue.main.async {
+                    fromVC.present(self, animated: animated, completion: completion)
+                }
             } else {
                 alertWindow = UIWindow(frame: UIScreen.main.bounds)
                 alertWindow?.rootViewController = UIViewController()
